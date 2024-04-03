@@ -81,7 +81,13 @@ class _SettingWithLoginState extends State<SettingWithLogin> {
               hint: 'Personal information',
             ),
             onTap: () {
-              nextScreen(context, const ProfileCustome());
+              //nextScreen(context, const ProfileCustome());
+
+              Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfileCustome()))
+                  .then((value) => setState(() {}));
             },
           ),
           InkWell(
@@ -90,7 +96,7 @@ class _SettingWithLoginState extends State<SettingWithLogin> {
               hint: 'Change Password',
             ),
             onTap: () {
-              if (sp.provider == "GOOGLE") {
+              if (sp.provider == "GOOGLE" || sp.provider == "PHONE") {
                 openSnackbar(context, "Change password is invalid", Colors.red);
               } else {
                 String code = createCode();

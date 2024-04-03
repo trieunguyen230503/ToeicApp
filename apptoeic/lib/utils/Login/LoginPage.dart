@@ -1,6 +1,7 @@
 import 'package:apptoeic/admin/AdminMainPage.dart';
 import 'package:apptoeic/student/StudentMainPage.dart';
 import 'package:apptoeic/utils/Button.dart';
+import 'package:apptoeic/utils/Login/LoginByPhoneNumber.dart';
 import 'package:apptoeic/utils/constColor.dart';
 import 'package:apptoeic/utils/constContainer.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool enable = true;
+
   final userName = TextEditingController();
   final password = TextEditingController();
   final otpCodeController = TextEditingController();
@@ -34,7 +37,7 @@ class _LoginState extends State<Login> {
       RoundedLoadingButtonController();
   final RoundedLoadingButtonController loginController =
       RoundedLoadingButtonController();
-  final RoundedLoadingButtonController facebookController =
+  final RoundedLoadingButtonController phoneController =
       RoundedLoadingButtonController();
 
   String pss = "test";
@@ -92,10 +95,12 @@ class _LoginState extends State<Login> {
                   inputDecoration(
                     hint: 'Enter your email',
                     inputcontroller: userName,
+                    enable: enable,
                   ),
                   inputDecorationPassword(
                     passwordHint: "Password",
                     passwordController: password,
+                    enable: enable,
                   ),
                   const SizedBox(
                     height: 20,
@@ -103,7 +108,7 @@ class _LoginState extends State<Login> {
                   buttonRounded(context, loginController, darkblue, Icons.login,
                       'Login', login),
                   const SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   buttonRounded(
                       context,
@@ -113,7 +118,17 @@ class _LoginState extends State<Login> {
                       'Sign in with google',
                       handleGoogle),
                   const SizedBox(
-                    height: 30,
+                    height: 20,
+                  ),
+                  buttonRounded(
+                      context,
+                      phoneController,
+                      Colors.black,
+                      FontAwesomeIcons.phone,
+                      'Sign in with phone number',
+                      nextScrenLoginByPhoneNumber),
+                  const SizedBox(
+                    height: 20,
                   ),
                   InkWell(
                     onTap: () {
@@ -151,7 +166,15 @@ class _LoginState extends State<Login> {
         ));
   }
 
+  void nextScrenLoginByPhoneNumber() {
+    nextScreen(context, const LoginByPhoneNumber());
+    phoneController.reset();
+  }
+
   Future login() async {
+    setState(() {
+      enable = false;
+    });
     if (userName.text.isNotEmpty) {
       String email = userName.text.toString().trim();
       String password1 = password.text.toString().trim();
@@ -165,18 +188,22 @@ class _LoginState extends State<Login> {
           await sp
               .saveDataToSharedPreferences()
               .then((value) => sp.setSignIn().then((value) => {
-                    //loginController.success(),
+                    loginController.success(),
                     handleAfterSingIn(),
                   }));
         } else {
           openSnackbar(context, "Your information is not correct", Colors.red);
-          //loginController.reset();
+          loginController.reset();
         }
       });
     } else {
-      openSnackbar(context, 'Vui lòng điền đầy đủ', Colors.red);
-      // loginController.reset();
+      openSnackbar(context, 'Please fill full of information', Colors.red);
+      loginController.reset();
     }
+
+    setState(() {
+      enable = true;
+    });
   }
 
   //handling google signin in
@@ -187,13 +214,14 @@ class _LoginState extends State<Login> {
     await ip.checkInternetConnection();
     if (ip.hasInternet == false) {
       openSnackbar(context, "Check your Internet connection", Colors.red);
-      //googleController.reset();
+      googleController.reset();
     } else {
       await sp.signInWithGoogle().then((value) => {
             if (sp.hasError == true)
               {
                 openSnackbar(context, sp.errorCode, Colors.red),
-                googleController.reset()
+                googleController.reset(),
+                sp.hasError = false
               }
             else
               {
@@ -216,24 +244,15 @@ class _LoginState extends State<Login> {
                               handleAfterSingIn();
                             })));
                   }
-                })
+                }),
               }
           });
     }
   }
 
   void handleAfterSingIn() async {
-    final SharedPreferences s = await SharedPreferences.getInstance();
-    int? role = s.getInt('role');
-
-    if (role == 1) {
-      Future.delayed(const Duration(microseconds: 1000)).then((value) {
-        nextScreenReplace(context, const StudentMainPage());
-      });
-    } else {
-      Future.delayed(const Duration(microseconds: 1000)).then((value) {
-        nextScreenReplace(context, const AdminMainPage());
-      });
-    }
+    Future.delayed(const Duration(microseconds: 1000)).then((value) {
+      nextScreenReplace(context, const StudentMainPage());
+    });
   }
 }

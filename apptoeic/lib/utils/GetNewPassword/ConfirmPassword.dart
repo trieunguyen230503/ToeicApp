@@ -24,6 +24,7 @@ class ConfirmPassword extends StatefulWidget {
 class _ConfirmPasswordState extends State<ConfirmPassword> {
   final codeconfirm = TextEditingController();
   final confirmPasswordController = RoundedLoadingButtonController();
+  bool enable = true;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +53,7 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
           inputDecoration(
             hint: 'Enter your Code sent',
             inputcontroller: codeconfirm,
+            enable: enable,
           ),
           const SizedBox(
             height: 10,
@@ -83,6 +85,10 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
   }
 
   Future handleCode() async {
+    setState(() {
+      enable = false;
+    });
+
     if (widget.code == codeconfirm.text) {
       confirmPasswordController.success();
       nextScreenReplace(
@@ -94,5 +100,8 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
       openSnackbar(context, 'Code is not correct', Colors.red);
       confirmPasswordController.reset();
     }
+    setState(() {
+      enable = false;
+    });
   }
 }

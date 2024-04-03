@@ -30,7 +30,9 @@ class SignInProvider extends ChangeNotifier {
   bool _hasError = false;
 
   bool get hasError => _hasError;
-
+  set hasError(bool value){
+    _hasError = value;
+  }
   String? _errorCode;
 
   String? get errorCode => _errorCode;
@@ -71,14 +73,6 @@ class SignInProvider extends ChangeNotifier {
 
   String? get dob => _dob;
 
-  int? _role;
-
-  int? get role => _role;
-
-  List<Users>? _userCustomer;
-
-  List<Users>? get userCustomer => _userCustomer;
-
   SignInProvider() {
     checkSignInUser();
   }
@@ -98,19 +92,24 @@ class SignInProvider extends ChangeNotifier {
 
 //sign in with google
   Future signInWithGoogle() async {
+    //Trả về đối tượng tài khoản đã đăng nhập
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();
     if (googleSignInAccount != null) {
       //executing our authentication
       try {
+        //thông tin xác thực của tài khoản Google
         final GoogleSignInAuthentication googleSignInAuthentication =
             await googleSignInAccount.authentication;
         //Lấy token từ firebase
+
+        //Đối tượng AuthCredential được sử dụng để xác thực với Firebase.
         final AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleSignInAuthentication.accessToken,
           idToken: googleSignInAuthentication.idToken,
         );
         //singing to firebase user instance
+        //trả về là một đối tượng User đại diện cho người dùng đã đăng nhập.
         final User userDetail =
             (await firebaseAuth.signInWithCredential(credential)).user!;
 
@@ -124,7 +123,6 @@ class SignInProvider extends ChangeNotifier {
         _phone = " ";
         _address = " ";
         _dob = " ";
-        _role = 1;
       } on FirebaseException catch (e) {
         switch (e.code) {
           case "account-exists-with-different-credential":
@@ -145,6 +143,7 @@ class SignInProvider extends ChangeNotifier {
         }
       }
     } else {
+      _errorCode = 'Sigin failed';
       _hasError = true;
       notifyListeners();
     }
@@ -162,7 +161,6 @@ class SignInProvider extends ChangeNotifier {
               _email = snapshot['email'],
               _imageUrl = snapshot['image_url'],
               _provider = snapshot['provider'],
-              _role = snapshot['role']
             });
   }
 
@@ -179,37 +177,23 @@ class SignInProvider extends ChangeNotifier {
     _phone = data['phone'];
     _address = data['address'];
     _password = data['password'];
-    _role = data['role'];
   }
 
   //Save dành cho user
   Future saveDataToFirestore() async {
     final DocumentReference r =
         FirebaseFirestore.instance.collection("users").doc(uid);
-    if (_provider == "PHONE") {
-      //Vì PHONE không có UID trả về nên lấy key của document gán đỡ
-      await r.set({
-        "name": _name,
-        "email": _email,
-        "uid": r.id,
-        "image_url": _imageUrl,
-        "role": 1,
-        "phone": _phone,
-        "provider": _provider,
-        "password": password,
-        "address": "",
-        "dob": _dob
-      });
-    } else {
-      await r.set({
-        "name": _name,
-        "email": _email,
-        "uid": _uid,
-        "image_url": _imageUrl,
-        "role": 1,
-        "provider": _provider,
-      });
-    }
+    await r.set({
+      "name": _name,
+      "email": _email,
+      "uid": r.id,
+      "image_url": _imageUrl,
+      "phone": _phone,
+      "provider": _provider,
+      "password": password,
+      "address": "",
+      "dob": _dob
+    });
   }
 
   Future saveDataToSharedPreferences() async {
@@ -224,9 +208,7 @@ class SignInProvider extends ChangeNotifier {
     await s.setString('dob', _dob!);
 
     await s.setString('password', _password!);
-    await s.setInt('role', _role!);
 
-    print("role trong sharePre$_role");
     notifyListeners();
   }
 
@@ -241,7 +223,6 @@ class SignInProvider extends ChangeNotifier {
     _phone = s.getString('phone');
     _address = s.getString('address') ?? "";
     _dob = s.getString('dob');
-    _role = s.getInt('role');
     _password = s.getString('password');
     notifyListeners();
   }
@@ -289,11 +270,10 @@ class SignInProvider extends ChangeNotifier {
         _email = document['email'];
         _imageUrl = document['image_url'];
         _provider = document['provider'];
-        _phone = document ['phone'];
+        _phone = document['phone'];
         _password = document['password'];
         _address = document['address'];
         _dob = document['dob'];
-        _role = document['role'];
       }
 
       print("Existing User");
@@ -327,11 +307,10 @@ class SignInProvider extends ChangeNotifier {
     //MÃ hóa mật khẩu
     _password = sha512.convert(utf8.encode(password.toString())).toString();
     _imageUrl = "https://cdn-icons-png.flaticon.com/512/1946/1946429.png";
-    _provider = "PHONE";
+    _provider = "REGISTER";
     _uid = null;
     _address = "";
     _dob = dob;
-    _role = 1;
     notifyListeners();
   }
 
@@ -417,6 +396,19 @@ class SignInProvider extends ChangeNotifier {
     await s.setString("phone", phone!);
     await s.setString('address', address!);
     await s.setString('dob', dob!);
+    notifyListeners();
+  }
+
+  void phoneNumberUser(User user) {
+    _name = 'User';
+    _email = user.phoneNumber;
+    _phone = user.phoneNumber;
+    _password = '';
+    _imageUrl = "https://cdn-icons-png.flaticon.com/512/1946/1946429.png";
+    _provider = "PHONE";
+    _uid = user.uid;
+    _address = "";
+    _dob = '';
     notifyListeners();
   }
 }

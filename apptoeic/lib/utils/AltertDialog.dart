@@ -1,7 +1,8 @@
 import 'package:apptoeic/utils/constColor.dart';
+import 'package:apptoeic/utils/next_screen.dart';
 import 'package:flutter/material.dart';
 
-void openAlertDialog(context, tiltle, content, keyword) {
+void openAlertDialog(context, tiltle, content, keyword, pageview) {
   showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -30,7 +31,7 @@ void openAlertDialog(context, tiltle, content, keyword) {
                               borderRadius: BorderRadius.circular(30))),
                       onPressed: () {
                         Navigator.pop(context);
-                        Navigator.pop(context);
+                        nextScreenReplace(context, pageview);
                       },
                       child: Text(
                         keyword,
@@ -59,6 +60,49 @@ void openAlertDialog(context, tiltle, content, keyword) {
                       ))
                 ],
               ),
+            )
+          ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        );
+      });
+}
+
+void openAlertDialogTimeUp(context, tiltle, content, keyword, pageview) {
+  showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            tiltle,
+            textAlign: TextAlign.center,
+          ),
+          content: Text(
+            content,
+            textAlign: TextAlign.center,
+            style: const TextStyle(height: 1.5),
+          ),
+          actions: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(
+                  bottom: MediaQuery.sizeOf(context).height * 0.03),
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: darkblue,
+                      fixedSize: const Size(90, 50),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30))),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    nextScreenReplace(context, pageview);
+                  },
+                  child: Text(
+                    keyword,
+                    style: const TextStyle(color: Colors.white),
+                  )),
             )
           ],
           shape: RoundedRectangleBorder(

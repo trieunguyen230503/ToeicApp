@@ -25,8 +25,7 @@ class _RenewPasswordState extends State<RenewPassword> {
   final password = TextEditingController();
   final confirmpassword = TextEditingController();
 
-  bool _obscureText = true;
-  bool _obscureText1 = true;
+  bool enable = true;
 
   final renewPassowrd = RoundedLoadingButtonController();
 
@@ -67,12 +66,18 @@ class _RenewPasswordState extends State<RenewPassword> {
               height: 50,
             ),
             inputDecorationPassword(
-                passwordHint: 'Password', passwordController: password),
+              passwordHint: 'Password',
+              passwordController: password,
+              enable: enable,
+            ),
             const SizedBox(
               height: 10,
             ),
             inputDecorationPassword(
-                passwordHint: 'Confirm', passwordController: confirmpassword),
+              passwordHint: 'Confirm',
+              passwordController: confirmpassword,
+              enable: enable,
+            ),
             const SizedBox(
               height: 10,
             ),
@@ -103,6 +108,10 @@ class _RenewPasswordState extends State<RenewPassword> {
   }
 
   void updateData() async {
+    setState(() {
+      enable = false;
+    });
+
     if (confirmpassword.text == password.text) {
       if (confirmpassword.text.length > 8) {
         final sp = context.read<SignInProvider>();
@@ -120,5 +129,9 @@ class _RenewPasswordState extends State<RenewPassword> {
       openSnackbar(context, "Password doesn't match", Colors.red);
       renewPassowrd.reset();
     }
+
+    setState(() {
+      enable = true;
+    });
   }
 }

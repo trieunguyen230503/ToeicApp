@@ -37,7 +37,7 @@ class ConfirmEmail extends StatefulWidget {
 class _ConfirmEmailState extends State<ConfirmEmail> {
   final codeconfirm = TextEditingController();
   final confirmController = RoundedLoadingButtonController();
-
+  bool enable = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +63,7 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
         ),
         inputDecoration(
           hint: 'Enter your Code sent',
-          inputcontroller: codeconfirm,
+          inputcontroller: codeconfirm, enable: enable,
         ),
         const SizedBox(
           height: 20,
@@ -95,6 +95,9 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
   }
 
   Future handleCode() async {
+    setState(() {
+      enable = false;
+    });
     if (widget.code == codeconfirm.text) {
       final sp = context.read<SignInProvider>();
       sp.CreateNewAccount(
@@ -107,5 +110,8 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
       openSnackbar(context, "Code is not correct", Colors.red);
       confirmController.reset();
     }
+    setState(() {
+      enable = true;
+    });
   }
 }

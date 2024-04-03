@@ -1,5 +1,7 @@
 import 'package:apptoeic/utils/constColor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 class inputEmailProfile extends StatefulWidget {
@@ -40,10 +42,14 @@ class _inputEmailProfileState extends State<inputEmailProfile> {
 
 class inputDecoration extends StatefulWidget {
   const inputDecoration(
-      {super.key, required this.hint, required this.inputcontroller});
+      {super.key,
+      required this.hint,
+      required this.inputcontroller,
+      required this.enable});
 
   final hint;
   final inputcontroller;
+  final enable;
 
   @override
   State<inputDecoration> createState() => _inputDecorationState();
@@ -58,6 +64,7 @@ class _inputDecorationState extends State<inputDecoration> {
       padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.06, 0,
           MediaQuery.of(context).size.width * 0.06, 0),
       child: TextFormField(
+        enabled: widget.enable,
         controller: widget.inputcontroller,
         decoration: InputDecoration(
             border: OutlineInputBorder(
@@ -77,10 +84,12 @@ class inputDecorationPassword extends StatefulWidget {
   const inputDecorationPassword(
       {super.key,
       required this.passwordHint,
-      required this.passwordController});
+      required this.passwordController,
+      required this.enable});
 
   final passwordHint;
   final passwordController;
+  final enable;
 
   @override
   State<inputDecorationPassword> createState() =>
@@ -89,6 +98,7 @@ class inputDecorationPassword extends StatefulWidget {
 
 class _inputDecorationPasswordState extends State<inputDecorationPassword> {
   bool _obscureText = true;
+  bool _isInputFocused = false;
 
   @override
   Widget build(BuildContext context) {
@@ -98,8 +108,14 @@ class _inputDecorationPasswordState extends State<inputDecorationPassword> {
       padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.06, 0,
           MediaQuery.of(context).size.width * 0.06, 0),
       child: TextFormField(
+        enabled: widget.enable,
         obscureText: _obscureText,
         controller: widget.passwordController,
+        onTap: () {
+          setState(() {
+            _isInputFocused = true;
+          });
+        },
         decoration: InputDecoration(
             suffixIcon: GestureDetector(
               onTap: () {
@@ -109,7 +125,7 @@ class _inputDecorationPasswordState extends State<inputDecorationPassword> {
               },
               child: Icon(
                 _obscureText ? Icons.visibility_off : Icons.visibility,
-                color: darkblue,
+                color: _isInputFocused ? darkblue : Colors.grey,
               ),
             ),
             hintText: widget.passwordHint,
@@ -127,8 +143,12 @@ class _inputDecorationPasswordState extends State<inputDecorationPassword> {
 
 class inputPhoneNumber extends StatefulWidget {
   const inputPhoneNumber(
-      {super.key, required this.hint, required this.phoneController});
+      {super.key,
+      required this.hint,
+      required this.phoneController,
+      required this.enable});
 
+  final enable;
   final hint;
   final phoneController;
 
@@ -137,6 +157,8 @@ class inputPhoneNumber extends StatefulWidget {
 }
 
 class _inputPhoneNumberState extends State<inputPhoneNumber> {
+  bool _isInputFocused = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -145,9 +167,32 @@ class _inputPhoneNumberState extends State<inputPhoneNumber> {
       padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.06, 0,
           MediaQuery.of(context).size.width * 0.06, 0),
       child: TextFormField(
+        enabled: widget.enable,
         keyboardType: TextInputType.number,
         controller: widget.phoneController,
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+          LengthLimitingTextInputFormatter(9)
+        ],
+        onTap: () {
+          setState(() {
+            _isInputFocused = true;
+          });
+        },
         decoration: InputDecoration(
+          prefixIcon: Container(
+            width: 50,
+            height: 20,
+            alignment: Alignment.center,
+            child: Text(
+              '+84',
+              style: TextStyle(
+                color: _isInputFocused ? darkblue : Colors.grey,
+              ),
+            ),
+          ),
+
+          // Có thể thay đổi màu sắc của tiền tố tùy ý
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -163,10 +208,15 @@ class _inputPhoneNumberState extends State<inputPhoneNumber> {
 }
 
 class inputDOB extends StatefulWidget {
-  const inputDOB({super.key, required this.hint, required this.dobController});
+  const inputDOB(
+      {super.key,
+      required this.hint,
+      required this.dobController,
+      required this.enable});
 
   final hint;
   final dobController;
+  final enable;
 
   @override
   State<inputDOB> createState() => _inputDOBState();
@@ -202,6 +252,7 @@ class _inputDOBState extends State<inputDOB> {
       padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.06, 0,
           MediaQuery.of(context).size.width * 0.06, 0),
       child: TextFormField(
+        enabled: widget.enable,
         keyboardType: TextInputType.datetime,
         controller: widget.dobController,
         decoration: InputDecoration(

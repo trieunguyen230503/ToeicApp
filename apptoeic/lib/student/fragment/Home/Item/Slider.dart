@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:ffi';
 
+import 'package:apptoeic/utils/constColor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../utils/config.dart';
+import '../../../../utils/config.dart';
 
 class SliderImage extends StatefulWidget {
   const SliderImage({super.key});
@@ -21,9 +22,9 @@ class _SliderState extends State<SliderImage> {
 
   final List<String> _sliderImages = [
     Config.slider1,
-    Config.slider1,
-    Config.slider1,
-    Config.slider1,
+    Config.slider2,
+    Config.slider3,
+    Config.slider4,
   ];
 
   @override
@@ -48,6 +49,7 @@ class _SliderState extends State<SliderImage> {
     super.dispose();
     _timer?.cancel();
   }
+
   @override
   Widget build(BuildContext context) {
     final List<Image> _slider = _sliderImages
@@ -85,7 +87,7 @@ class _SliderState extends State<SliderImage> {
             dotWidth: 10,
             spacing: 5,
             dotColor: Color.fromRGBO(217, 217, 217, 1),
-            activeDotColor: Color.fromRGBO(102, 102, 102, 1),
+            activeDotColor: darkblue,
             paintStyle: PaintingStyle.fill,
           ),
         )

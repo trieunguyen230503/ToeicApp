@@ -7,27 +7,27 @@ class Vocabulary {
   final String spell;
   String? example;
   String? image;
-  int? vocabCate;
+  String? vocabCate;
   String? audio;
 
-  Vocabulary({
-    required this.vocabId,
-    required this.eng,
-    required this.vie,
-    required this.spell,
-    required this.image,
-    required this.example,
-    required this.audio,
-    required this.vocabCate
-  });
+  Vocabulary(
+      {required this.vocabId,
+      required this.eng,
+      required this.vie,
+      required this.spell,
+      required this.image,
+      required this.example,
+      required this.audio,
+      required this.vocabCate});
 
-  Vocabulary.qui(this.vocabId, this.eng, this.vie, this.spell,
-      this.example, this.vocabCate, this.audio, this.image);
+  Vocabulary.qui(this.vocabId, this.eng, this.vie, this.spell, this.example,
+      this.vocabCate, this.audio, this.image);
 
   String? key;
   VocabData? vocabData;
 
-  Vocabulary.all(this.vocabId, this.eng, this.vie, this.spell, this.image, this.vocabCate,
+  Vocabulary.all(
+      this.vocabId, this.eng, this.vie, this.spell, this.image, this.vocabCate,
       {this.key, this.vocabData});
 
   Vocabulary.fromSnapshot(DataSnapshot snapshot)
@@ -37,7 +37,7 @@ class Vocabulary {
         spell = snapshot.child('Spell').value.toString(),
         example = snapshot.child('Example').value.toString(),
         image = snapshot.child('url').value.toString(),
-        vocabCate = int.parse(snapshot.child('VocabCate').value.toString()),
+        vocabCate = snapshot.child('VocabCate').value.toString(),
         audio = snapshot.child('audio').value.toString();
 
   toJson() {
@@ -66,13 +66,13 @@ class VocabData {
 
   VocabData(
       {this.vocabId,
-        this.eng,
-        this.vie,
-        this.spell,
-        this.vocabCate,
-        this.audio,
-        this.example,
-        this.url});
+      this.eng,
+      this.vie,
+      this.spell,
+      this.vocabCate,
+      this.audio,
+      this.example,
+      this.url});
 
   VocabData.fromSnapshot(DataSnapshot snapshot)
       : vocabId = snapshot.child('VocabId').value.toString(),

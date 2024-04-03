@@ -25,6 +25,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   final userName = TextEditingController();
   String code = '';
   final emailController = RoundedLoadingButtonController();
+  bool enable = true;
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +98,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             inputDecoration(
               hint: 'Enter your email',
               inputcontroller: userName,
+              enable: enable,
             ),
             const SizedBox(
               height: 20,
@@ -125,6 +127,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   }
 
   void checkEmaildata() async {
+    setState(() {
+      enable = false;
+    });
+
     final sp = context.read<SignInProvider>();
     final ip = context.read<InternetProvider>();
     await ip.checkInternetConnection();
@@ -144,6 +150,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         emailController.reset();
         openSnackbar(context, "Doesn't exist this email", Colors.red);
       }
+    });
+
+    setState(() {
+      enable = true;
     });
   }
 }

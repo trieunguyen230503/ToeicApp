@@ -19,8 +19,15 @@ class _TestPageState extends State<TestPage> {
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.02,
           ),
-          const TestType(),
-          const TestType()
+          const TestType(
+            level: 1,
+          ),
+          const TestType(
+            level: 2,
+          ),
+          const TestType(
+            level: 3,
+          )
         ],
       ),
     );

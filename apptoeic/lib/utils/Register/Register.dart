@@ -37,6 +37,7 @@ class _RegisterState extends State<Register> {
   final _scaffoldKey = GlobalKey<FormState>();
 
   String code = '';
+  bool enable = true;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class _RegisterState extends State<Register> {
           leading: IconButton(
             icon: const Icon(
               Icons.keyboard_arrow_left,
-              color: Colors.black,
+              color: Colors.white,
             ),
             // Đổi icon về
             onPressed: () {
@@ -53,11 +54,11 @@ class _RegisterState extends State<Register> {
               // Xử lý khi người dùng nhấn vào icon trở về
             },
           ),
-          backgroundColor: const Color.fromRGBO(247, 247, 247, 1.0),
+          backgroundColor: darkblue,
           centerTitle: true,
           title: const Text(
             'REGISTER',
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
         body: SingleChildScrollView(
@@ -81,26 +82,34 @@ class _RegisterState extends State<Register> {
                   height: 30,
                 ),
                 inputDecoration(
-                    hint: 'Enter your email', inputcontroller: email),
+                  hint: 'Enter your email',
+                  inputcontroller: email,
+                  enable: enable,
+                ),
                 inputDecoration(
                   hint: 'Enter your name',
                   inputcontroller: name,
+                  enable: enable,
                 ),
                 inputPhoneNumber(
                   hint: 'Enter your phone number',
                   phoneController: phone,
+                  enable: enable,
                 ),
                 inputDOB(
                   hint: 'Date of birth',
                   dobController: dob,
+                  enable: enable,
                 ),
                 inputDecorationPassword(
                   passwordHint: 'Password',
                   passwordController: password,
+                  enable: enable,
                 ),
                 inputDecorationPassword(
                   passwordHint: 'Confirm Password',
                   passwordController: confirmpassword,
+                  enable: enable,
                 ),
                 buttonRounded(context, registerController, darkblue,
                     FontAwesomeIcons.registered, 'Sign up', register),
@@ -133,6 +142,9 @@ class _RegisterState extends State<Register> {
   }
 
   Future register() async {
+    setState(() {
+      enable = false;
+    });
     if (phone.text.isNotEmpty ||
         email.text.isNotEmpty ||
         name.text.isNotEmpty ||
@@ -140,7 +152,7 @@ class _RegisterState extends State<Register> {
         confirmpassword.text.isNotEmpty) {
       if (email.text.contains("@gmail.com") ||
           email.text.contains("@st.huflit.edu.vn")) {
-        if (phone.text.length == 10) {
+        if (phone.text.length == 9) {
           if (confirmpassword.text == password.text) {
             if (confirmpassword.text.length > 8) {
               final sp = context.read<SignInProvider>();
@@ -151,7 +163,7 @@ class _RegisterState extends State<Register> {
                 if (value == true) {
                   //user exists
                   openSnackbar(context, "This email is used", Colors.red);
-                  //registerController.reset();
+                  registerController.reset();
                 } else {
                   //user doesn't exist
                   if (ip.hasInternet == false) {
@@ -163,9 +175,9 @@ class _RegisterState extends State<Register> {
                       sendingmail(
                           name: name.text.toString().trim(),
                           email: email.text.toString().trim(),
-                          subject: 'Reset your password',
+                          subject: 'Your code to register new account',
                           message: code);
-                      //registerController.success();
+                      registerController.success();
                       //chuyển sang trang xác nhận email
                       checkEmaildata();
                     }
@@ -194,6 +206,10 @@ class _RegisterState extends State<Register> {
       openSnackbar(context, 'Please fill full information', Colors.red);
       registerController.reset();
     }
+
+    setState(() {
+      enable = true;
+    });
   }
 
   void checkEmaildata() {

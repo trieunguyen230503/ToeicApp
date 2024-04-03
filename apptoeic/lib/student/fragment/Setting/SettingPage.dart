@@ -30,7 +30,7 @@ class _SettingPageState extends State<SettingPage> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           checklogin = snapshot.data ?? false;
-          return checklogin == true
+          return checklogin
               ? const SettingWithLogin()
               : const OpResLogin();
         } else {

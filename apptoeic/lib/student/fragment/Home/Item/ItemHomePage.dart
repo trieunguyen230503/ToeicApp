@@ -1,31 +1,45 @@
-import 'package:apptoeic/student/fragment/Home/Practice/ListeningPractice.dart';
+import 'package:apptoeic/provider/signin_provider.dart';
+import 'package:apptoeic/student/fragment/Home/Practice/Test/CategoryPractice.dart';
+import 'package:apptoeic/student/fragment/Setting/SetttingWOLogin.dart';
 import 'package:apptoeic/student/fragment/Test/TestPage.dart';
 import 'package:apptoeic/utils/constColor.dart';
 import 'package:apptoeic/utils/next_screen.dart';
+import 'package:apptoeic/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ItemHomePage extends StatefulWidget {
   const ItemHomePage(
       {super.key,
       required this.title,
       required this.lstImg,
-      required this.lstHeadline});
+      required this.lstHeadline,
+      required this.lstWiget});
 
   final title;
   final lstImg;
   final lstHeadline;
+  final lstWiget;
 
   @override
   State<ItemHomePage> createState() => _ItemHomePageState();
 }
 
 class _ItemHomePageState extends State<ItemHomePage> {
-  final List<Widget> ItemOption = <Widget>[
-    const CategoryTest(),
-    const CategoryTest(),
-    const CategoryTest(),
-    const CategoryTest(),
-  ];
+  bool isLogin = false;
+
+  void checkLogin() async {
+    final sp = context.read<SignInProvider>();
+    await sp.checkSignInUser();
+    isLogin = sp.isSignedIn;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkLogin();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +92,11 @@ class _ItemHomePageState extends State<ItemHomePage> {
                           children: [
                             InkWell(
                               onTap: () {
-                                nextScreen(context, const CategoryTest());
+                                isLogin
+                                    ? nextScreen(
+                                        context, widget.lstWiget[index])
+                                    : openSnackbar(context,
+                                        'Please login first', Colors.red);
                               },
                               child:
                                   Stack(alignment: Alignment.center, children: [

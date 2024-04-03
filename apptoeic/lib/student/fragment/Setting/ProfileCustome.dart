@@ -148,12 +148,26 @@ class _ProfileCustomeState extends State<ProfileCustome> {
               ),
               inputEmailProfile(
                   hint: 'Enter your email', inputcontroller: email),
-              inputDecoration(hint: 'Enter your name', inputcontroller: name),
-              inputPhoneNumber(
-                  hint: 'Enter your phone', phoneController: phone),
               inputDecoration(
-                  hint: 'Enter your address', inputcontroller: address),
-              inputDOB(hint: 'Enter your dob', dobController: dob),
+                hint: 'Enter your name',
+                inputcontroller: name,
+                enable: true,
+              ),
+              inputPhoneNumber(
+                hint: 'Enter your phone',
+                phoneController: phone,
+                enable: true,
+              ),
+              inputDecoration(
+                hint: 'Enter your address',
+                inputcontroller: address,
+                enable: true,
+              ),
+              inputDOB(
+                hint: 'Enter your dob',
+                dobController: dob,
+                enable: true,
+              ),
               buttonRounded(
                   context,
                   updateController,
