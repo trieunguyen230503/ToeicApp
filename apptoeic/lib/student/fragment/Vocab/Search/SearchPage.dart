@@ -25,7 +25,6 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     super.initState();
     getData();
-    //_searchController.onChange(_performSearch);
     _loadSearchHistory();
   }
 
@@ -108,27 +107,29 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 100,
-        backgroundColor: Colors.white,
-        title: Container(
-          margin:
-              EdgeInsets.only(left: MediaQuery.of(context).size.height * 0.01),
-          padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.height * 0.02),
-          height: 55,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(9),
-            border: Border.all(
-                color: Colors.grey, width: 2.0, style: BorderStyle.solid),
-          ),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        title: Expanded(
+          child: Container(
+            margin:
+            EdgeInsets.only(left: MediaQuery.of(context).size.height * 0.01),
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.height * 0.02),
+            height: 55,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(9),
+              border: Border.all(
+                  color: Colors.grey, width: 2.0, style: BorderStyle.solid),
+            ),
           child: Row(
             children: [
               Container(
                 margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.height * 0.001),
+                    left: MediaQuery.of(context).size.height * 0.002),
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: TextFormField(
                   controller: _searchController,
@@ -136,9 +137,11 @@ class _SearchPageState extends State<SearchPage> {
                     _performSearch(value);
                     print(value);
                   },
+                  style: const TextStyle(color: Colors.black),
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: "Enter a keyword",
+                    hintStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
               ),
@@ -160,17 +163,20 @@ class _SearchPageState extends State<SearchPage> {
                     ),
             ],
           ),
+          ),
         ),
         actions: [
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.03,
+            width: MediaQuery.of(context).size.width * 0.02,
           )
         ],
       ),
-      body: _searchController.text.isEmpty && _searchHistory.isNotEmpty
-          ? _buildSearchHistory()
-          : _buildSearchResults(),
-      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0), // Đặt giá trị lề trái và lề phải tại đây
+        child: _searchController.text.isEmpty && _searchHistory.isNotEmpty
+            ? _buildSearchHistory()
+            : _buildSearchResults(),
+      ),
     );
   }
 
@@ -183,7 +189,6 @@ class _SearchPageState extends State<SearchPage> {
             itemBuilder: (context, index) => ListTile(
               title: Text(
                 _searchHistory[index],
-                style: const TextStyle(color: Colors.black),
               ),
               onTap: () {
                 Navigator.push(
@@ -204,7 +209,6 @@ class _SearchPageState extends State<SearchPage> {
           },
           child: const Text(
             'Clear all history',
-            style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
         ))
       ],
@@ -219,7 +223,6 @@ class _SearchPageState extends State<SearchPage> {
           alignment: AlignmentDirectional.topCenter,
           child: const Text(
             "No data found",
-            style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
         ),
       );
@@ -230,12 +233,12 @@ class _SearchPageState extends State<SearchPage> {
                 onTap: () {
                   _addSearchHistory(_vocabularyListTemp[index].eng);
                   nextScreen(context,
-                      VocabDetailPage(vocabulary: _vocabularyListTemp[index]));
+                      VocabDetailPage(vocabulary: _vocabularyListTemp[index])
+                  );
                 },
                 child: ListTile(
                   title: Text(
                     _vocabularyListTemp[index].eng,
-                    style: const TextStyle(color: Colors.black),
                   ),
                 ),
               ));

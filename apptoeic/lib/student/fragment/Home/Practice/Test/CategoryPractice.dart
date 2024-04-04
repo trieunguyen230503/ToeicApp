@@ -51,149 +51,152 @@ class _CategoryTestState extends State<CategoryTest> {
         centerTitle: true,
         title: TextAppbar('${widget.title} PRATICE'),
       ),
-      body: FutureBuilder(
-          future: getData(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Column(children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: const Offset(0, 2),
+      body: Container(
+        color: Theme.of(context).colorScheme.background,
+        child: FutureBuilder(
+            future: getData(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Column(children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: const Offset(0, 2),
+                          )
+                        ]),
+                    margin: EdgeInsets.fromLTRB(
+                        MediaQuery.sizeOf(context).width * 0.08,
+                        MediaQuery.sizeOf(context).height * 0.04,
+                        MediaQuery.sizeOf(context).width * 0.08,
+                        0),
+                    width: MediaQuery.sizeOf(context).width,
+                    height: MediaQuery.sizeOf(context).height * 0.15,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              0, 0, MediaQuery.sizeOf(context).width * 0.08, 0),
+                          child: Image.asset(
+                            widget.imageTitle,
+                            width: MediaQuery.sizeOf(context).width * 0.15,
+                            height: MediaQuery.sizeOf(context).height * 0.1,
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.sizeOf(context).width * 0.45,
+                          height: MediaQuery.sizeOf(context).height * 0.08,
+                          child: const Text(
+                            'SELECT THE FORM YOU WANT TO DO',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: darkblue,
+                                fontWeight: FontWeight.bold,
+                                height: 1.5),
+                          ),
                         )
-                      ]),
-                  margin: EdgeInsets.fromLTRB(
-                      MediaQuery.sizeOf(context).width * 0.08,
-                      MediaQuery.sizeOf(context).height * 0.04,
-                      MediaQuery.sizeOf(context).width * 0.08,
-                      0),
-                  width: MediaQuery.sizeOf(context).width,
-                  height: MediaQuery.sizeOf(context).height * 0.15,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            0, 0, MediaQuery.sizeOf(context).width * 0.08, 0),
-                        child: Image.asset(
-                          widget.imageTitle,
-                          width: MediaQuery.sizeOf(context).width * 0.15,
-                          height: MediaQuery.sizeOf(context).height * 0.1,
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.sizeOf(context).width * 0.45,
-                        height: MediaQuery.sizeOf(context).height * 0.08,
-                        child: const Text(
-                          'SELECT THE FORM YOU WANT TO DO',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: darkblue,
-                              fontWeight: FontWeight.bold,
-                              height: 1.5),
-                        ),
-                      )
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.sizeOf(context).height * 0.005),
-                    child: ListView.builder(
-                        itemCount: itemCategory.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: EdgeInsets.fromLTRB(
-                                MediaQuery.sizeOf(context).width * 0.08,
-                                MediaQuery.sizeOf(context).height * 0.04,
-                                MediaQuery.sizeOf(context).width * 0.08,
-                                0),
-                            child: InkWell(
-                              onTap: () {
-                                nextScreenReplace(
-                                    context,
-                                    FrameListQuestion(
-                                      numberQuestion: selectedValue[index],
-                                      isTest: false,
-                                      type: widget.title
-                                              .substring(0, 1)
-                                              .toUpperCase() +
-                                          widget.title
-                                              .substring(1)
-                                              .toLowerCase(),
-                                      itemCategoryId: itemCategoryId[index],
-                                    ));
-                              },
-                              child: Container(
-                                width: MediaQuery.sizeOf(context).width,
-                                height:
-                                    MediaQuery.sizeOf(context).height * 0.15,
-                                padding: EdgeInsets.fromLTRB(
-                                    MediaQuery.sizeOf(context).width * 0.07,
-                                    MediaQuery.sizeOf(context).height * 0.035,
-                                    0,
-                                    0),
-                                decoration: BoxDecoration(
-                                  color: darkblue,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      itemCategory[index],
-                                      style: const TextStyle(
-                                          fontSize: 15,
-                                          color: yellowLight,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(right: 20),
-                                          child: Text(
-                                            'The number of question ',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.white),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.sizeOf(context).height * 0.005),
+                      child: ListView.builder(
+                          itemCount: itemCategory.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                  MediaQuery.sizeOf(context).width * 0.08,
+                                  MediaQuery.sizeOf(context).height * 0.04,
+                                  MediaQuery.sizeOf(context).width * 0.08,
+                                  0),
+                              child: InkWell(
+                                onTap: () {
+                                  nextScreenReplace(
+                                      context,
+                                      FrameListQuestion(
+                                        numberQuestion: selectedValue[index],
+                                        isTest: false,
+                                        type: widget.title
+                                                .substring(0, 1)
+                                                .toUpperCase() +
+                                            widget.title
+                                                .substring(1)
+                                                .toLowerCase(),
+                                        itemCategoryId: itemCategoryId[index],
+                                      ));
+                                },
+                                child: Container(
+                                  width: MediaQuery.sizeOf(context).width,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.15,
+                                  padding: EdgeInsets.fromLTRB(
+                                      MediaQuery.sizeOf(context).width * 0.07,
+                                      MediaQuery.sizeOf(context).height * 0.035,
+                                      0,
+                                      0),
+                                  decoration: BoxDecoration(
+                                    color: darkblue,
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        itemCategory[index],
+                                        style: const TextStyle(
+                                            fontSize: 15,
+                                            color: yellowLight,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Padding(
+                                            padding: EdgeInsets.only(right: 20),
+                                            child: Text(
+                                              'The number of question ',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.white),
+                                            ),
                                           ),
-                                        ),
-                                        DropDownList(
-                                          selectedValue: selectedValue,
-                                          i: index,
-                                        ),
-                                      ],
-                                    )
-                                  ],
+                                          DropDownList(
+                                            selectedValue: selectedValue,
+                                            i: index,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        }),
+                            );
+                          }),
+                    ),
+                  )
+                ]);
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: darkblue,
+                    strokeWidth: 5,
                   ),
-                )
-              ]);
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(
-                  backgroundColor: darkblue,
-                  strokeWidth: 5,
-                ),
-              );
-            }
-          }),
+                );
+              }
+            }),
+      ),
     );
   }
 }

@@ -1,9 +1,12 @@
 import 'package:apptoeic/provider/internet_provider.dart';
 import 'package:apptoeic/provider/signin_provider.dart';
 import 'package:apptoeic/splashscreen.dart';
+import 'package:apptoeic/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
+import 'package:apptoeic/theme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,9 +30,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => SignInProvider()),
         ChangeNotifierProvider(create: (context) => InternetProvider())
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: const SplashScreen(),
+        theme: lightMode,
+        darkTheme: darkMode,
       ),
     );
   }

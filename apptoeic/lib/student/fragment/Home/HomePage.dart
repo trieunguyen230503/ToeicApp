@@ -1,6 +1,7 @@
 import 'package:apptoeic/student/fragment/Home/Item/History.dart';
 import 'package:apptoeic/student/fragment/Home/Item/ItemHomePage.dart';
 import 'package:apptoeic/student/fragment/Home/Practice/Test/CategoryPractice.dart';
+import 'package:apptoeic/student/fragment/Vocab/VocabCate.dart';
 import 'package:apptoeic/utils/config.dart';
 import 'package:apptoeic/utils/constColor.dart';
 import 'package:flutter/material.dart';
@@ -48,10 +49,7 @@ class _HomePageState extends State<HomePage> {
       imageTitle: Config.itemHomePage2,
     ),
     const History(),
-    CategoryTest(
-      title: 'LISTENING',
-      imageTitle: Config.itemHomePage3,
-    )
+    const VocabulayCategory(),
   ];
 
   List<Widget> lstWiget2 = [
@@ -65,7 +63,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Container(
-      color: backGroundColor,
+      color: Theme.of(context).colorScheme.background,
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.05,

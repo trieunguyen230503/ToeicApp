@@ -10,24 +10,21 @@ class Vocabulary {
   String? vocabCate;
   String? audio;
 
-  Vocabulary(
-      {required this.vocabId,
-      required this.eng,
-      required this.vie,
-      required this.spell,
-      required this.image,
-      required this.example,
-      required this.audio,
-      required this.vocabCate});
-
-  Vocabulary.qui(this.vocabId, this.eng, this.vie, this.spell, this.example,
-      this.vocabCate, this.audio, this.image);
+  Vocabulary({
+    required this.vocabId,
+    required this.eng,
+    required this.vie,
+    required this.spell,
+    required this.image,
+    required this.example,
+    required this.audio,
+    required this.vocabCate
+  });
 
   String? key;
   VocabData? vocabData;
 
-  Vocabulary.all(
-      this.vocabId, this.eng, this.vie, this.spell, this.image, this.vocabCate,
+  Vocabulary.all(this.vocabId, this.eng, this.vie, this.spell, this.image, this.audio, this.vocabCate,
       {this.key, this.vocabData});
 
   Vocabulary.fromSnapshot(DataSnapshot snapshot)
@@ -36,9 +33,9 @@ class Vocabulary {
         vie = snapshot.child('Vie').value.toString(),
         spell = snapshot.child('Spell').value.toString(),
         example = snapshot.child('Example').value.toString(),
-        image = snapshot.child('url').value.toString(),
+        image = snapshot.child('Url').value.toString(),
         vocabCate = snapshot.child('VocabCate').value.toString(),
-        audio = snapshot.child('audio').value.toString();
+        audio = snapshot.child('Audio').value.toString();
 
   toJson() {
     return {
@@ -48,8 +45,8 @@ class Vocabulary {
       'Spell': spell,
       'Example': example,
       'VocabCate': vocabCate,
-      'audio': audio,
-      'image': image
+      'Audio': audio,
+      'Image': image
     };
   }
 }
@@ -57,7 +54,7 @@ class Vocabulary {
 class VocabData {
   String? vocabId;
   String? eng;
-  int? vocabCate;
+  String? vocabCate;
   String? audio;
   String? vie;
   String? example;
@@ -66,13 +63,13 @@ class VocabData {
 
   VocabData(
       {this.vocabId,
-      this.eng,
-      this.vie,
-      this.spell,
-      this.vocabCate,
-      this.audio,
-      this.example,
-      this.url});
+        this.eng,
+        this.vie,
+        this.spell,
+        this.vocabCate,
+        this.audio,
+        this.example,
+        this.url});
 
   VocabData.fromSnapshot(DataSnapshot snapshot)
       : vocabId = snapshot.child('VocabId').value.toString(),
@@ -80,9 +77,9 @@ class VocabData {
         vie = snapshot.child('Vie').value.toString(),
         spell = snapshot.child('Spell').value.toString(),
         example = snapshot.child('Example').value.toString(),
-        url = snapshot.child('url').value.toString(),
-        vocabCate = int.parse(snapshot.child('VocabCate').value.toString()),
-        audio = snapshot.child('audio').value.toString();
+        url = snapshot.child('Url').value.toString(),
+        vocabCate = snapshot.child('VocabCate').value.toString(),
+        audio = snapshot.child('Audio').value.toString();
 
   VocabData.fromJson(Map<dynamic, dynamic> json) {
     vocabId = json["VocabId"];
@@ -90,8 +87,8 @@ class VocabData {
     vie = json["Vie"];
     spell = json["Spell"];
     vocabCate = json["VocabCate"];
-    audio = json["audio"];
+    audio = json["Audio"];
     example = json["Example"];
-    url = json["url"];
+    url = json["Url"];
   }
 }

@@ -241,30 +241,34 @@ class _FrameListQuestionState extends State<FrameListQuestion>
               ),
             ),
             body: _dataLoaded
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: TabBarView(
-                          controller: _tabController,
-                          children: [
-                            for (int i = 0; i < widget.numberQuestion; i++)
-                              TestPractice(
-                                audioPlayer:
-                                    listAudioPlayer?[_tabController.index],
-                                isplaying: isplaying?[_tabController.index],
-                                question: lstQuestion?[i],
-                                answer: lstAnswer[i],
-                              ),
-                          ],
+                ? Container(
+              color: Theme.of(context).colorScheme.background,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: TabBarView(
+                            controller: _tabController,
+                            children: [
+                              for (int i = 0; i < widget.numberQuestion; i++)
+                                TestPractice(
+                                  audioPlayer:
+                                      listAudioPlayer?[_tabController.index],
+                                  isplaying: isplaying?[_tabController.index],
+                                  question: lstQuestion?[i],
+                                  answer: lstAnswer[i],
+                                ),
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.sizeOf(context).height * 0.06,
-                      )
-                    ],
-                  )
+                        // Container(
+                        //   color: Theme.of(context).colorScheme.background,
+                        //   height: MediaQuery.sizeOf(context).height * 0.06,
+                        // )
+                      ],
+                    ),
+                )
                 : const Center(
                     child: CircularProgressIndicator(
                       color: darkblue,

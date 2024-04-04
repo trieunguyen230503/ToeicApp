@@ -63,8 +63,9 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 icon: const Icon(Icons.account_circle), label: _labels[3])
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: darkblue,
-          unselectedItemColor: Colors.grey,
+          selectedItemColor: Theme.of(context).colorScheme.primary,
+          unselectedItemColor: Colors.grey.shade500,
+          backgroundColor: Theme.of(context).colorScheme.background,
           onTap: _onItemTapped),
       body: _widgetOptions.elementAt(_selectedIndex),
     );

@@ -82,7 +82,8 @@ class _TestPracticeState extends State<TestPractice>
     );
 
     return SingleChildScrollView(
-      child: SizedBox(
+      child: Container(
+        color: Theme.of(context).colorScheme.background,
         width: MediaQuery.sizeOf(context).width,
         height: MediaQuery.sizeOf(context).height * 0.625 + lineHeight * 1.2,
         child: Column(
@@ -155,6 +156,7 @@ class _TestPracticeState extends State<TestPractice>
                           child: Text(
                             '${optionList[index]}.  ${awsList[index]}',
                             style: const TextStyle(
+                              color: Colors.black,
                               fontSize: 16,
                             ),
                           ),
@@ -194,7 +196,7 @@ class _TestPracticeState extends State<TestPractice>
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             fixedSize: const Size.fromHeight(60),
-            primary: !isButtonPressed[index] ? backGroundColor : darkblue,
+            primary: !isButtonPressed[index] ? backGroundColor :Theme.of(context).colorScheme.primary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(70),
               // Đặt độ cong của góc
@@ -206,7 +208,7 @@ class _TestPracticeState extends State<TestPractice>
           child: Text(
             optionList[index],
             style: TextStyle(
-                color: !isButtonPressed[index] ? Colors.black : Colors.white,
+                color: !isButtonPressed[index] ? Colors.black : Theme.of(context).colorScheme.tertiary,
                 fontSize: 18,
                 fontWeight:
                     isButtonPressed[index] ? FontWeight.bold : FontWeight.w500),

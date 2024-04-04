@@ -66,8 +66,8 @@ class _ItemHomePageState extends State<ItemHomePage> {
               ),
               child: Text(
                 widget.title.toString(),
-                style: const TextStyle(
-                    color: darkblue, fontWeight: FontWeight.bold, fontSize: 18),
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
             SizedBox(
@@ -136,8 +136,8 @@ class _ItemHomePageState extends State<ItemHomePage> {
                               alignment: Alignment.center,
                               child: Text(
                                 widget.lstHeadline[index],
-                                style: const TextStyle(
-                                    color: darkblue,
+                                style: TextStyle(
+                                    color: Theme.of(context).colorScheme.primary,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 13),
                               ),
