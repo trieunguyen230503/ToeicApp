@@ -176,7 +176,6 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        // Đặt giá trị lề trái và lề phải tại đây
         child: _searchController.text.isEmpty && _searchHistory.isNotEmpty
             ? _buildSearchHistory()
             : _buildSearchResults(),

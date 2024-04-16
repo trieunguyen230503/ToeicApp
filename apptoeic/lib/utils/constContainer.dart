@@ -514,7 +514,7 @@ class _SettingContainerState extends State<SettingContainer> {
           title: Text(widget.hint.toString()),
           leading: Icon(
             widget.icon,
-            color: darkblue,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
       );

@@ -29,6 +29,7 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           backgroundColor: darkblue,
           centerTitle: true,

@@ -32,6 +32,7 @@ class _RenewPasswordState extends State<RenewPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(

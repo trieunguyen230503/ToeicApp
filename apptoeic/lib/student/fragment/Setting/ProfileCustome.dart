@@ -84,6 +84,7 @@ class _ProfileCustomeState extends State<ProfileCustome> {
     }
 
     return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(

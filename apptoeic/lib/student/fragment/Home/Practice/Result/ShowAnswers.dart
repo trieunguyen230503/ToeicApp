@@ -44,6 +44,7 @@ class _ShowAnswersState extends State<ShowAnswers> {
             style: TextStyle(color: Colors.white),
           ),
         ),
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: OrientationBuilder(builder: (context, orientation) {
           if (orientation == Orientation.portrait) {
             return Container(

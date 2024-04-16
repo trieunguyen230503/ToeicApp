@@ -71,7 +71,7 @@ class _TestTypeState extends State<TestType> {
     return checkdata ?
     (widget.orientaion == 1 ?
     Container(
-      //color: Colors.grey,
+      color: Theme.of(context).colorScheme.background,
       width: MediaQuery
           .of(context)
           .size
@@ -108,9 +108,9 @@ class _TestTypeState extends State<TestType> {
             ),
             child: Text(
               title,
-              style: const TextStyle(
-                color: darkblue,
-                fontSize: 15,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 16.5,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -203,6 +203,7 @@ class _TestTypeState extends State<TestType> {
                           child: Text(
                             lstTestLevel[index]![1],
                             style: const TextStyle(
+                              color: darkblue,
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
                             ),

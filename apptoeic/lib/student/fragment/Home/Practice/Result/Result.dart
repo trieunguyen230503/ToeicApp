@@ -83,6 +83,7 @@ class _ResultState extends State<Result> with AutomaticKeepAliveClientMixin{
           ),
           centerTitle: true,
         ),
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: FutureBuilder(
             future: saveHistory(),
             builder: (context, snapshot) {
@@ -111,8 +112,7 @@ class _ResultState extends State<Result> with AutomaticKeepAliveClientMixin{
                                     fontSize: 24, fontWeight: FontWeight.bold),
                                 children: <TextSpan>[
                                   const TextSpan(
-                                      text: 'Training ',
-                                      style: TextStyle(color: Colors.black)),
+                                      text: 'Training ',),
                                   TextSpan(
                                       text: widget.type,
                                       style: const TextStyle(

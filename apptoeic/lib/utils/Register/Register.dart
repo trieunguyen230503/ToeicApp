@@ -42,6 +42,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(
@@ -121,11 +122,11 @@ class _RegisterState extends State<Register> {
                       },
                       child: Container(
                         margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                        child: const Row(
+                        child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Already have an account? ',
+                              const Text('Already have an account? ',
                                   style: TextStyle(
                                     fontSize: 14,
                                   )),
@@ -133,7 +134,7 @@ class _RegisterState extends State<Register> {
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14,
-                                      color: darkblue)),
+                                      color: Theme.of(context).colorScheme.primary)),
                             ]),
                       ),
                     ),
@@ -200,11 +201,11 @@ class _RegisterState extends State<Register> {
                       },
                       child: Container(
                         margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                        child: const Row(
+                        child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Already have an account? ',
+                              const Text('Already have an account? ',
                                   style: TextStyle(
                                     fontSize: 14,
                                   )),
@@ -212,7 +213,7 @@ class _RegisterState extends State<Register> {
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14,
-                                      color: darkblue)),
+                                      color: Theme.of(context).colorScheme.primary)),
                             ]),
                       ),
                     ),

@@ -76,6 +76,7 @@ class _DetailAnswerState extends State<DetailAnswer> {
     );
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: darkblue,
         centerTitle: true,
@@ -168,6 +169,7 @@ class _DetailAnswerState extends State<DetailAnswer> {
                                 child: Text(
                                   '${optionList[index]}.  ${awsList[index]}',
                                   style: const TextStyle(
+                                    color: Colors.black,
                                     fontSize: 16,
                                   ),
                                 ),

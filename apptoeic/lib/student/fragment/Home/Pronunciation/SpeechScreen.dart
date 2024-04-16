@@ -42,6 +42,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: darkblue,
         centerTitle: true,
@@ -73,10 +74,10 @@ class _SpeechScreenState extends State<SpeechScreen> {
         children: [
           Text(
             _text,
-            style: const TextStyle(
-              fontSize: 30.0,
-              color: darkblue,
-              fontWeight: FontWeight.w400,
+            style: TextStyle(
+              fontSize: 32.0,
+              color: Theme.of(context).colorScheme.outline,
+              fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(
@@ -84,9 +85,9 @@ class _SpeechScreenState extends State<SpeechScreen> {
           ),
           Text(
             widget.vocabulary.spell,
-            style: const TextStyle(
-              fontSize: 30.0,
-              color: darkblue,
+            style: TextStyle(
+              fontSize: 28.0,
+              color: Theme.of(context).colorScheme.primary,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -98,7 +99,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
             style: TextStyle(
               fontSize: 30.0,
               color: similarityRate == 1
-                  ? Colors.green
+                  ? mainColor
                   : (similarityRate > 90
                       ? Colors.orange
                       : (similarityRate > 70 ? Colors.yellow : Colors.red)),

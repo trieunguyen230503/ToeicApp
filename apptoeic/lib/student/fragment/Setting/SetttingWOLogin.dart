@@ -19,6 +19,7 @@ class _OpResLoginState extends State<OpResLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: widget.orientaion == 1
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.start,

@@ -94,6 +94,7 @@ class _HistoryState extends State<History> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           backgroundColor: darkblue,
           title: const Text(
@@ -164,6 +165,7 @@ class _HistoryState extends State<History> {
                                                 .substring(1)
                                                 .toLowerCase(),
                                         style: const TextStyle(
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18),
                                       ),

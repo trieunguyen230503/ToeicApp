@@ -42,6 +42,7 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           backgroundColor: darkblue,
           centerTitle: true,
@@ -90,9 +91,9 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
                     },
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                      child: const Text('Return Home Page',
+                      child: Text('Return Home Page',
                           style: TextStyle(
-                            color: darkblue,
+                            color: Theme.of(context).colorScheme.outline,
                             decoration: TextDecoration.underline,
                           )),
                     ),
@@ -137,9 +138,9 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
                   },
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                    child: const Text('Return Home Page',
+                    child: Text('Return Home Page',
                         style: TextStyle(
-                          color: darkblue,
+                          color: Theme.of(context).colorScheme.outline,
                           decoration: TextDecoration.underline,
                         )),
                   ),

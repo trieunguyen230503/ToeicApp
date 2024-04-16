@@ -43,6 +43,7 @@ class _LoginByPhoneNumberState extends State<LoginByPhoneNumber> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(
@@ -140,6 +141,7 @@ class _LoginByPhoneNumberState extends State<LoginByPhoneNumber> {
                     //Gán vô để hàm handleSignIn dùng
                     IDverify = verificationId;
                     return AlertDialog(
+                      backgroundColor: Theme.of(context).colorScheme.background,
                       title: const Text(
                         'Enter Code',
                         textAlign: TextAlign.center,

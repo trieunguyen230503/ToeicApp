@@ -52,7 +52,7 @@ class _SettingWithLoginState extends State<SettingWithLogin> {
       if(orientation == Orientation.portrait){
        return SingleChildScrollView(
           child: Container(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.background,
             padding: EdgeInsets.only(
                 right: MediaQuery.sizeOf(context).height * 0.01,
                 left: MediaQuery.sizeOf(context).height * 0.01),
@@ -73,7 +73,7 @@ class _SettingWithLoginState extends State<SettingWithLogin> {
                 ),
                 Text(
                   "${sp.name}",
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(
                   height: MediaQuery.sizeOf(context).height * 0.1,

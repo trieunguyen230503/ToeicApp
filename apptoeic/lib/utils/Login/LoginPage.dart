@@ -57,6 +57,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(
@@ -140,9 +141,9 @@ class _LoginState extends State<Login> {
                               onTap: () {
                                 nextScreen(context, const ForgetPassword());
                               },
-                              child: const Text('I forgot my password',
+                              child: Text('I forgot my password',
                                   style:
-                                      TextStyle(fontSize: 15, color: darkblue)),
+                                      TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.outline)),
                             ),
                             InkWell(
                               onTap: () {
@@ -150,12 +151,12 @@ class _LoginState extends State<Login> {
                               },
                               child: Container(
                                 margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                                child: const Row(
+                                child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text('Don\'t have an account? ',
+                                      const Text('Don\'t have an account? ',
                                           style: TextStyle(
                                             fontSize: 14,
                                           )),
@@ -163,7 +164,7 @@ class _LoginState extends State<Login> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 14,
-                                              color: darkblue)),
+                                              color: Theme.of(context).colorScheme.primary)),
                                     ]),
                               ),
                             ),

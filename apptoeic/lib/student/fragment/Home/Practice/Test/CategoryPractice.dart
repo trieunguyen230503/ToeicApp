@@ -51,6 +51,7 @@ class _CategoryTestState extends State<CategoryTest> {
         centerTitle: true,
         title: TextAppbar('${widget.title} PRATICE'),
       ),
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: FutureBuilder(
           future: getData(),
           builder: (context, snapshot) {
