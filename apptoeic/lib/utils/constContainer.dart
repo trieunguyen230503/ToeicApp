@@ -105,14 +105,24 @@ class _inputDecorationState extends State<inputDecoration> {
                 0),
             child: TextFormField(
               enabled: widget.enable,
+              style: TextStyle(color: Theme.of(context).colorScheme.outline),
               controller: widget.inputcontroller,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                   hintText: widget.hint,
+                  hintStyle:
+                      TextStyle(color: Theme.of(context).colorScheme.outline),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary), // Đặt màu cho border khi không focus ở đây
+                  ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: darkblue),
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary),
                     borderRadius: BorderRadius.circular(10),
                   )),
             ),
@@ -130,6 +140,7 @@ class _inputDecorationState extends State<inputDecoration> {
                 MediaQuery.of(context).size.width * 0.06,
                 0),
             child: TextFormField(
+              style: TextStyle(color: Theme.of(context).colorScheme.outline),
               enabled: widget.enable,
               controller: widget.inputcontroller,
               decoration: InputDecoration(
@@ -137,8 +148,17 @@ class _inputDecorationState extends State<inputDecoration> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   hintText: widget.hint,
+                  hintStyle:
+                      TextStyle(color: Theme.of(context).colorScheme.outline),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary), // Đặt màu cho border khi không focus ở đây
+                  ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: darkblue),
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary),
                     borderRadius: BorderRadius.circular(10),
                   )),
             ),
@@ -308,7 +328,9 @@ class _inputPhoneNumberState extends State<inputPhoneNumber> {
                   child: Text(
                     '+84',
                     style: TextStyle(
-                      color: _isInputFocused ? Theme.of(context).colorScheme.primary : Colors.grey,
+                      color: _isInputFocused
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.grey,
                     ),
                   ),
                 ),
@@ -358,7 +380,9 @@ class _inputPhoneNumberState extends State<inputPhoneNumber> {
                   child: Text(
                     '+84',
                     style: TextStyle(
-                      color: _isInputFocused ? Theme.of(context).colorScheme.primary : Colors.grey,
+                      color: _isInputFocused
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.grey,
                     ),
                   ),
                 ),

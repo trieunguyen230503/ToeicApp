@@ -32,7 +32,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        'ConfirmPass': (context) => ConfirmPassword(
+        'ConfirmPass': (context) =>
+            ConfirmPassword(
               code: '',
               email: '',
             ),
@@ -55,82 +56,104 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             title: const Text(
               'RECOVER YOUR PASSWORD',
               style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
           ),
+          backgroundColor: Theme
+              .of(context)
+              .colorScheme
+              .background,
           body: OrientationBuilder(builder: (context, orientation) {
             if (orientation == Orientation.portrait) {
               return SingleChildScrollView(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 80,
-                      ),
-                      Image(
-                        image: AssetImage(Config.logo),
-                        height: 120,
-                        width: 120,
-                      ),
-                      const SizedBox(
-                        height: 80,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.sizeOf(context).width * 0.05,
-                            right: MediaQuery.sizeOf(context).width * 0.05),
-                        child: RichText(
-                            textAlign: TextAlign.center,
-                            text: const TextSpan(
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.black),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: 'Enter the email ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  TextSpan(
-                                      text:
-                                          'that you used when you signed up to recover your password.' +
-                                              ' You will receive a '),
-                                  TextSpan(
-                                      text: 'password reset code',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold))
-                                ])),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      inputDecoration(
-                        hint: 'Enter your email',
-                        inputcontroller: userName,
-                        enable: enable,
-                        orientation: 1,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      buttonRounded(context, emailController, darkblue,
-                          Icons.login, 'Confirm', checkEmaildata, 1),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const StudentMainPage()));
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                          child: const Text('Return Home Page',
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  fontWeight: FontWeight.bold)),
+                child: Container(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 80,
                         ),
-                      ),
-                    ]),
+                        Image(
+                          image: AssetImage(Config.logo),
+                          height: 120,
+                          width: 120,
+                        ),
+                        const SizedBox(
+                          height: 80,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: MediaQuery
+                                  .sizeOf(context)
+                                  .width * 0.05,
+                              right: MediaQuery
+                                  .sizeOf(context)
+                                  .width * 0.05),
+                          child: RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Theme
+                                          .of(context)
+                                          .colorScheme
+                                          .outline),
+                                  children: const <TextSpan>[
+                                    TextSpan(
+                                      text: 'Enter the email ',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    TextSpan(
+                                        text:
+                                        'that you used when you signed up to recover your password.' +
+                                            ' You will receive a '),
+                                    TextSpan(
+                                        text: 'password reset code',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold))
+                                  ])),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        inputDecoration(
+                          hint: 'Enter your email',
+                          inputcontroller: userName,
+                          enable: enable,
+                          orientation: 1,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        buttonRounded(
+                            context,
+                            emailController,
+                            darkblue,
+                            Icons.login,
+                            'Confirm',
+                            checkEmaildata,
+                            1),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const StudentMainPage()));
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                            child: Text('Return Home Page',
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    fontWeight: FontWeight.bold, color: Theme
+                                    .of(context)
+                                    .colorScheme.outline)),
+                          ),
+                        ),
+                      ]),
+                ),
               );
             } else {
               return SingleChildScrollView(
@@ -150,23 +173,32 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: MediaQuery.sizeOf(context).width * 0.05,
-                            right: MediaQuery.sizeOf(context).width * 0.05),
+                            left: MediaQuery
+                                .sizeOf(context)
+                                .width * 0.05,
+                            right: MediaQuery
+                                .sizeOf(context)
+                                .width * 0.05),
                         child: RichText(
                             textAlign: TextAlign.center,
-                            text: const TextSpan(
+                            text: TextSpan(
                                 style: TextStyle(
-                                    fontSize: 16, color: Colors.black),
-                                children: <TextSpan>[
+                                    fontSize: 16,
+                                    color:
+                                    Theme
+                                        .of(context)
+                                        .colorScheme
+                                        .outline),
+                                children: const <TextSpan>[
                                   TextSpan(
                                     text: 'Enter the email ',
                                     style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                    TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                   TextSpan(
                                       text:
-                                          'that you used when you signed up to recover your password.' +
-                                              ' You will receive a '),
+                                      'that you used when you signed up to recover your password.' +
+                                          ' You will receive a '),
                                   TextSpan(
                                       text: 'password reset code',
                                       style: TextStyle(
@@ -185,22 +217,32 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       const SizedBox(
                         height: 20,
                       ),
-                      buttonRounded(context, emailController, darkblue,
-                          Icons.login, 'Confirm', checkEmaildata, 2),
+                      buttonRounded(
+                          context,
+                          emailController,
+                          darkblue,
+                          Icons.login,
+                          'Confirm',
+                          checkEmaildata,
+                          2),
                       InkWell(
                         onTap: () {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const StudentMainPage()));
+                                  const StudentMainPage()));
                         },
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                          child: const Text('Return Home Page',
+                          child: Text('Return Home Page',
                               style: TextStyle(
                                   decoration: TextDecoration.underline,
-                                  fontWeight: FontWeight.bold)),
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme
+                                      .of(context)
+                                      .colorScheme
+                                      .outline)),
                         ),
                       ),
                     ]),
