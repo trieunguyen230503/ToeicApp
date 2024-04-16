@@ -63,45 +63,90 @@ class _LoginByPhoneNumberState extends State<LoginByPhoneNumber> {
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image(
-                  image: AssetImage(Config.logo),
-                  height: MediaQuery.sizeOf(context).height * 0.2,
-                  width: MediaQuery.sizeOf(context).height * 0.2,
+      body: OrientationBuilder(builder: (context, orientation){
+        if(orientation == Orientation.portrait){
+          return SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image(
+                      image: AssetImage(Config.logo),
+                      height: MediaQuery.sizeOf(context).height * 0.2,
+                      width: MediaQuery.sizeOf(context).height * 0.2,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.15,
+                    ),
+                    inputPhoneNumber(
+                      hint: 'Enter your phone number',
+                      phoneController: phonenumer,
+                      enable: enable1, orientation: 1,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    buttonRounded(
+                        context,
+                        phoneController,
+                        darkblue,
+                        FontAwesomeIcons.phone,
+                        'Sign in with phone number',
+                        handlePhoneNumber,1),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: MediaQuery.sizeOf(context).height * 0.15,
-                ),
-                inputPhoneNumber(
-                  hint: 'Enter your phone number',
-                  phoneController: phonenumer,
-                  enable: enable1, orientation: 1,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                buttonRounded(
-                    context,
-                    phoneController,
-                    darkblue,
-                    FontAwesomeIcons.phone,
-                    'Sign in with phone number',
-                    handlePhoneNumber,1),
-                const SizedBox(
-                  height: 20,
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
+          );
+        }
+        else{
+          return SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image(
+                      image: AssetImage(Config.logo),
+                      height: MediaQuery.sizeOf(context).height * 0.4,
+                      width: MediaQuery.sizeOf(context).height * 0.4,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.05,
+                    ),
+                    inputPhoneNumber(
+                      hint: 'Enter your phone number',
+                      phoneController: phonenumer,
+                      enable: enable1, orientation: 2,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    buttonRounded(
+                        context,
+                        phoneController,
+                        darkblue,
+                        FontAwesomeIcons.phone,
+                        'Sign in with phone number',
+                        handlePhoneNumber,2),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+      }),
     );
   }
 

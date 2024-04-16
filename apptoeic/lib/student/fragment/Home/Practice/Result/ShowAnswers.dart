@@ -204,9 +204,12 @@ class _ShowAnswersState extends State<ShowAnswers> {
                                 ),
                                 Container(
                                   //color: Colors.grey,
-                                  padding: EdgeInsets.all(MediaQuery.sizeOf(context).height * 0.035),
+                                  padding: EdgeInsets.all(
+                                      MediaQuery.sizeOf(context).height *
+                                          0.035),
                                   width:
-                                      MediaQuery.of(context).size.width * 0.7, // Chỉnh chiều dài của khung chứa hình tròn đáp án
+                                      MediaQuery.of(context).size.width * 0.7,
+                                  // Chỉnh chiều dài của khung chứa hình tròn đáp án
                                   child: GridView.builder(
                                     shrinkWrap: true,
                                     physics:
@@ -215,7 +218,8 @@ class _ShowAnswersState extends State<ShowAnswers> {
                                     gridDelegate:
                                         const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 4,
-                                      crossAxisSpacing: 65,// khoảng cách giữa các hình
+                                      crossAxisSpacing: 65,
+                                      // khoảng cách giữa các hình
                                       mainAxisSpacing: 10,
                                     ),
                                     itemBuilder: (BuildContext context, int i) {

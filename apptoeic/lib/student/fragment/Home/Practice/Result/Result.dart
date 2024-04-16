@@ -24,7 +24,7 @@ class Result extends StatefulWidget {
   State<Result> createState() => _ResultState();
 }
 
-class _ResultState extends State<Result> with AutomaticKeepAliveClientMixin{
+class _ResultState extends State<Result> with AutomaticKeepAliveClientMixin {
   int numberCorrectAnswer = 0;
 
   @override
@@ -112,12 +112,14 @@ class _ResultState extends State<Result> with AutomaticKeepAliveClientMixin{
                                     fontSize: 24, fontWeight: FontWeight.bold),
                                 children: <TextSpan>[
                                   const TextSpan(
-                                      text: 'Training ',),
+                                    text: 'Training ',
+                                  ),
                                   TextSpan(
                                       text: widget.type,
-                                      style: const TextStyle(
-                                          color:
-                                              Color.fromRGBO(249, 192, 52, 1))),
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .outline)),
                                 ]),
                           ),
                           SizedBox(
@@ -260,9 +262,12 @@ class _ResultState extends State<Result> with AutomaticKeepAliveClientMixin{
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold),
                                   children: <TextSpan>[
-                                    const TextSpan(
+                                    TextSpan(
                                         text: 'Training ',
-                                        style: TextStyle(color: Colors.black)),
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .outline)),
                                     TextSpan(
                                         text: widget.type,
                                         style: const TextStyle(

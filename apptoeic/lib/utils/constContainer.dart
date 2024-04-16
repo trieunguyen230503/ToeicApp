@@ -308,7 +308,7 @@ class _inputPhoneNumberState extends State<inputPhoneNumber> {
                   child: Text(
                     '+84',
                     style: TextStyle(
-                      color: _isInputFocused ? darkblue : Colors.grey,
+                      color: _isInputFocused ? Theme.of(context).colorScheme.primary : Colors.grey,
                     ),
                   ),
                 ),
@@ -358,7 +358,7 @@ class _inputPhoneNumberState extends State<inputPhoneNumber> {
                   child: Text(
                     '+84',
                     style: TextStyle(
-                      color: _isInputFocused ? darkblue : Colors.grey,
+                      color: _isInputFocused ? Theme.of(context).colorScheme.primary : Colors.grey,
                     ),
                   ),
                 ),
