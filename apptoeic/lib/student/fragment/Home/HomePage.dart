@@ -1,6 +1,8 @@
 import 'package:apptoeic/student/fragment/Home/Item/History.dart';
 import 'package:apptoeic/student/fragment/Home/Item/ItemHomePage.dart';
+import 'package:apptoeic/student/fragment/Home/Pronunciation/SpeechScreen.dart';
 import 'package:apptoeic/student/fragment/Home/Practice/Test/CategoryPractice.dart';
+import 'package:apptoeic/student/fragment/Home/Pronunciation/VocabPronun.dart';
 import 'package:apptoeic/student/fragment/Vocab/VocabCate.dart';
 import 'package:apptoeic/utils/config.dart';
 import 'package:apptoeic/utils/constColor.dart';
@@ -25,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   List<String> lstTitle2 = [
-    'Translator',
+    'Pronunciation',
   ];
 
   List<String> lstImageTraning = [
@@ -52,46 +54,82 @@ class _HomePageState extends State<HomePage> {
     const VocabulayCategory(),
   ];
 
-  List<Widget> lstWiget2 = [
-    CategoryTest(
-      title: 'TRANSLATOR',
-      imageTitle: Config.itemHomePage4,
-    )
-  ];
+  List<Widget> lstWiget2 = [const VocabPronun()];
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Container(
-      color: Theme.of(context).colorScheme.background,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.05,
-          vertical: MediaQuery.of(context).size.height * 0.05,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SliderImage(),
-            SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.04,
+    return OrientationBuilder(builder: (context, orientation) {
+      if (orientation == Orientation.portrait) {
+        return SingleChildScrollView(
+            child: Container(
+          color: Theme.of(context).colorScheme.background,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.05,
+              vertical: MediaQuery.of(context).size.height * 0.05,
             ),
-            ItemHomePage(
-              title: lstTag[0],
-              lstImg: lstImageTraning,
-              lstHeadline: lstTitle1,
-              lstWiget: lstWiget1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SliderImage(orientation: 1,),
+                SizedBox(
+                  height: MediaQuery.sizeOf(context).height * 0.04,
+                ),
+                ItemHomePage(
+                  title: lstTag[0],
+                  lstImg: lstImageTraning,
+                  lstHeadline: lstTitle1,
+                  lstWiget: lstWiget1,
+                  itemPerRow: 4,
+                ),
+                ItemHomePage(
+                  title: lstTag[1],
+                  lstImg: lstImageEP,
+                  lstHeadline: lstTitle2,
+                  lstWiget: lstWiget2,
+                  itemPerRow: 4,
+                )
+              ],
             ),
-            ItemHomePage(
-              title: lstTag[1],
-              lstImg: lstImageEP,
-              lstHeadline: lstTitle2,
-              lstWiget: lstWiget2,
-            )
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
+      } else {
+        return SingleChildScrollView(
+            child: Container(
+              color: Theme.of(context).colorScheme.background,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.05,
+                  vertical: MediaQuery.of(context).size.height * 0.05,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SliderImage(orientation: 2,),
+                    SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.04,
+                    ),
+                    ItemHomePage(
+                      title: lstTag[0],
+                      lstImg: lstImageTraning,
+                      lstHeadline: lstTitle1,
+                      lstWiget: lstWiget1,
+                      itemPerRow: 2,
+                    ),
+                    ItemHomePage(
+                      title: lstTag[1],
+                      lstImg: lstImageEP,
+                      lstHeadline: lstTitle2,
+                      lstWiget: lstWiget2,
+                      itemPerRow: 2,
+                    )
+                  ],
+                ),
+              ),
+            ));
+      }
+    });
   }
 }

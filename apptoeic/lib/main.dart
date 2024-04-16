@@ -25,8 +25,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiProvider( // cung cấp nhiều provider
       providers: [
+        //Mỗi provider con có thể cung cấp một đối tượng riêng để sử dụng trong cả ứng dụng
+        //Cho phép tổ chức và quản lý việc cung cấp dữ liệu trong cả ứng dụng
         ChangeNotifierProvider(create: (context) => SignInProvider()),
         ChangeNotifierProvider(create: (context) => InternetProvider())
       ],

@@ -112,19 +112,20 @@ class _SearchPageState extends State<SearchPage> {
         elevation: 0,
         toolbarHeight: 100,
         backgroundColor: Theme.of(context).colorScheme.background,
-        title: Expanded(
-          child: Container(
-            margin:
-            EdgeInsets.only(left: MediaQuery.of(context).size.height * 0.01),
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.height * 0.02),
-            height: 55,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(9),
-              border: Border.all(
-                  color: Colors.grey, width: 2.0, style: BorderStyle.solid),
-            ),
+        automaticallyImplyLeading: false,
+        // Loại bỏ nút quay về
+        title: Container(
+          margin:
+              EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.01),
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.02),
+          height: 55,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(9),
+            border: Border.all(
+                color: Colors.grey, width: 2.0, style: BorderStyle.solid),
+          ),
           child: Row(
             children: [
               Container(
@@ -145,6 +146,9 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                 ),
               ),
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width * 0.07,
+              ),
               _searchController.text.isEmpty
                   ? const Icon(
                       Icons.search,
@@ -163,7 +167,6 @@ class _SearchPageState extends State<SearchPage> {
                     ),
             ],
           ),
-          ),
         ),
         actions: [
           SizedBox(
@@ -172,7 +175,8 @@ class _SearchPageState extends State<SearchPage> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0), // Đặt giá trị lề trái và lề phải tại đây
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        // Đặt giá trị lề trái và lề phải tại đây
         child: _searchController.text.isEmpty && _searchHistory.isNotEmpty
             ? _buildSearchHistory()
             : _buildSearchResults(),
@@ -233,8 +237,7 @@ class _SearchPageState extends State<SearchPage> {
                 onTap: () {
                   _addSearchHistory(_vocabularyListTemp[index].eng);
                   nextScreen(context,
-                      VocabDetailPage(vocabulary: _vocabularyListTemp[index])
-                  );
+                      VocabDetailPage(vocabulary: _vocabularyListTemp[index]));
                 },
                 child: ListTile(
                   title: Text(

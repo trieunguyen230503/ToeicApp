@@ -38,60 +38,116 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
   final codeconfirm = TextEditingController();
   final confirmController = RoundedLoadingButtonController();
   bool enable = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: darkblue,
-        centerTitle: true,
-        title: const Text(
-          'CONFIRM CODE',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-      ),
-      body: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        const SizedBox(
-          height: 80,
-        ),
-        Image.asset(
-          Config.logo,
-          width: 150,
-          height: 150,
-        ),
-        const SizedBox(
-          height: 80,
-        ),
-        inputDecoration(
-          hint: 'Enter your Code sent',
-          inputcontroller: codeconfirm, enable: enable,
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        buttonRounded(context, confirmController, darkblue,
-            FontAwesomeIcons.check, 'Confirm Code', handleCode),
-        const SizedBox(
-          height: 10,
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const StudentMainPage()));
-            //Navigator.pop(context);
-          },
-          child: Container(
-            margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-            child: const Text('Return Home Page',
-                style: TextStyle(
-                  color: darkblue,
-                  decoration: TextDecoration.underline,
-                )),
+        appBar: AppBar(
+          backgroundColor: darkblue,
+          centerTitle: true,
+          title: const Text(
+            'CONFIRM CODE',
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
-      ]),
-    );
+        body: OrientationBuilder(builder: (context, orientation) {
+          if (orientation == Orientation.portrait) {
+            return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 80,
+                  ),
+                  Image.asset(
+                    Config.logo,
+                    width: 150,
+                    height: 150,
+                  ),
+                  const SizedBox(
+                    height: 80,
+                  ),
+                  inputDecoration(
+                    hint: 'Enter your Code sent',
+                    inputcontroller: codeconfirm,
+                    enable: enable,
+                    orientation: 1,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  buttonRounded(context, confirmController, darkblue,
+                      FontAwesomeIcons.check, 'Confirm Code', handleCode, 1),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const StudentMainPage()));
+                      //Navigator.pop(context);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                      child: const Text('Return Home Page',
+                          style: TextStyle(
+                            color: darkblue,
+                            decoration: TextDecoration.underline,
+                          )),
+                    ),
+                  ),
+                ]);
+          } else {
+            return SingleChildScrollView(
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                const SizedBox(
+                  height: 80,
+                ),
+                Image.asset(
+                  Config.logo,
+                  width: 150,
+                  height: 150,
+                ),
+                const SizedBox(
+                  height: 80,
+                ),
+                inputDecoration(
+                  hint: 'Enter your Code sent',
+                  inputcontroller: codeconfirm,
+                  enable: enable,
+                  orientation: 2,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                buttonRounded(context, confirmController, darkblue,
+                    FontAwesomeIcons.check, 'Confirm Code', handleCode, 2),
+                const SizedBox(
+                  height: 10,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const StudentMainPage()));
+                    //Navigator.pop(context);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                    child: const Text('Return Home Page',
+                        style: TextStyle(
+                          color: darkblue,
+                          decoration: TextDecoration.underline,
+                        )),
+                  ),
+                ),
+              ]),
+            );
+          }
+        }));
   }
 
   Future handleCode() async {

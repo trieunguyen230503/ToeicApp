@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:apptoeic/model/Question.dart';
 import 'package:apptoeic/student/StudentMainPage.dart';
 import 'package:apptoeic/student/fragment/Home/Practice/Result/Result.dart';
-import 'package:apptoeic/student/fragment/Home/Practice/Test/Test.dart';
+import 'package:apptoeic/student/fragment/Home/Practice/Test/TestPractice.dart';
 import 'package:apptoeic/student/fragment/Test/CountDown.dart';
 import 'package:apptoeic/utils/AltertDialog.dart';
 import 'package:apptoeic/utils/constColor.dart';

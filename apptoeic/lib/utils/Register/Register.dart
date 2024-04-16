@@ -61,84 +61,167 @@ class _RegisterState extends State<Register> {
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
-        body: SingleChildScrollView(
-            child: Container(
-          padding: EdgeInsets.fromLTRB(
-              0,
-              MediaQuery.of(context).size.width * 0.09,
-              0,
-              MediaQuery.of(context).size.width * 0.09),
-          child: Form(
-            key: _scaffoldKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image(
-                  image: AssetImage(Config.logo),
-                  width: 100,
-                  height: 100,
+        body: OrientationBuilder(builder: (context, orientation) {
+          if (orientation == Orientation.portrait) {
+            return SingleChildScrollView(
+                child: Container(
+              padding: EdgeInsets.fromLTRB(
+                  0,
+                  MediaQuery.of(context).size.width * 0.09,
+                  0,
+                  MediaQuery.of(context).size.width * 0.09),
+              child: Form(
+                key: _scaffoldKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image(
+                      image: AssetImage(Config.logo),
+                      width: 150,
+                      height: 150,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    inputDecoration(
+                      hint: 'Enter your email',
+                      inputcontroller: email,
+                      enable: enable, orientation: 1,
+                    ),
+                    inputDecoration(
+                      hint: 'Enter your name',
+                      inputcontroller: name,
+                      enable: enable, orientation: 1,
+                    ),
+                    inputPhoneNumber(
+                      hint: 'Enter your phone number',
+                      phoneController: phone,
+                      enable: enable, orientation: 1,
+                    ),
+                    inputDOB(
+                      hint: 'Date of birth',
+                      dobController: dob,
+                      enable: enable, orientation: 1,
+                    ),
+                    inputDecorationPassword(
+                      passwordHint: 'Password',
+                      passwordController: password,
+                      enable: enable, orientation: 1,
+                    ),
+                    inputDecorationPassword(
+                      passwordHint: 'Confirm Password',
+                      passwordController: confirmpassword,
+                      enable: enable, orientation: 1,
+                    ),
+                    buttonRounded(context, registerController, darkblue,
+                        FontAwesomeIcons.registered, 'Sign up', register, 1),
+                    InkWell(
+                      onTap: () {
+                        nextScreen(context, const Login());
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                        child: const Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Already have an account? ',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  )),
+                              Text('Login',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                      color: darkblue)),
+                            ]),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 30,
+              ),
+            ));
+          } else {
+            return SingleChildScrollView(
+                child: Container(
+              padding: EdgeInsets.fromLTRB(
+                  0,
+                  MediaQuery.of(context).size.width * 0.09,
+                  0,
+                  MediaQuery.of(context).size.width * 0.09),
+              child: Form(
+                key: _scaffoldKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image(
+                      image: AssetImage(Config.logo),
+                      width: 100,
+                      height: 100,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    inputDecoration(
+                      hint: 'Enter your email',
+                      inputcontroller: email,
+                      enable: enable, orientation: 2,
+                    ),
+                    inputDecoration(
+                      hint: 'Enter your name',
+                      inputcontroller: name,
+                      enable: enable, orientation: 2,
+                    ),
+                    inputPhoneNumber(
+                      hint: 'Enter your phone number',
+                      phoneController: phone,
+                      enable: enable, orientation: 2,
+                    ),
+                    inputDOB(
+                      hint: 'Date of birth',
+                      dobController: dob,
+                      enable: enable, orientation: 2,
+                    ),
+                    inputDecorationPassword(
+                      passwordHint: 'Password',
+                      passwordController: password,
+                      enable: enable, orientation: 2,
+                    ),
+                    inputDecorationPassword(
+                      passwordHint: 'Confirm Password',
+                      passwordController: confirmpassword,
+                      enable: enable, orientation: 2,
+                    ),
+                    buttonRounded(context, registerController, darkblue,
+                        FontAwesomeIcons.registered, 'Sign up', register, 2),
+                    InkWell(
+                      onTap: () {
+                        nextScreen(context, const Login());
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                        child: const Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Already have an account? ',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  )),
+                              Text('Login',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                      color: darkblue)),
+                            ]),
+                      ),
+                    ),
+                  ],
                 ),
-                inputDecoration(
-                  hint: 'Enter your email',
-                  inputcontroller: email,
-                  enable: enable,
-                ),
-                inputDecoration(
-                  hint: 'Enter your name',
-                  inputcontroller: name,
-                  enable: enable,
-                ),
-                inputPhoneNumber(
-                  hint: 'Enter your phone number',
-                  phoneController: phone,
-                  enable: enable,
-                ),
-                inputDOB(
-                  hint: 'Date of birth',
-                  dobController: dob,
-                  enable: enable,
-                ),
-                inputDecorationPassword(
-                  passwordHint: 'Password',
-                  passwordController: password,
-                  enable: enable,
-                ),
-                inputDecorationPassword(
-                  passwordHint: 'Confirm Password',
-                  passwordController: confirmpassword,
-                  enable: enable,
-                ),
-                buttonRounded(context, registerController, darkblue,
-                    FontAwesomeIcons.registered, 'Sign up', register),
-                InkWell(
-                  onTap: () {
-                    nextScreen(context, const Login());
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                    child: const Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Already have an account? ',
-                              style: TextStyle(
-                                fontSize: 14,
-                              )),
-                          Text('Login',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                  color: darkblue)),
-                        ]),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        )));
+              ),
+            ));
+          }
+        }));
   }
 
   Future register() async {
@@ -225,9 +308,9 @@ class _RegisterState extends State<Register> {
         ));
   }
 
-  void handleAfterSingIn() {
-    Future.delayed(const Duration(microseconds: 1000)).then((value) {
-      nextScreenReplace(context, const StudentMainPage());
-    });
-  }
+  // void handleAfterSingIn() {
+  //   Future.delayed(const Duration(microseconds: 1000)).then((value) {
+  //     nextScreenReplace(context, const StudentMainPage());
+  //   });
+  // }
 }

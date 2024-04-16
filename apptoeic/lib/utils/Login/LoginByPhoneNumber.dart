@@ -81,7 +81,7 @@ class _LoginByPhoneNumberState extends State<LoginByPhoneNumber> {
                 inputPhoneNumber(
                   hint: 'Enter your phone number',
                   phoneController: phonenumer,
-                  enable: enable1,
+                  enable: enable1, orientation: 1,
                 ),
                 const SizedBox(
                   height: 20,
@@ -92,7 +92,7 @@ class _LoginByPhoneNumberState extends State<LoginByPhoneNumber> {
                     darkblue,
                     FontAwesomeIcons.phone,
                     'Sign in with phone number',
-                    handlePhoneNumber),
+                    handlePhoneNumber,1),
                 const SizedBox(
                   height: 20,
                 ),
@@ -178,7 +178,7 @@ class _LoginByPhoneNumberState extends State<LoginByPhoneNumber> {
                               darkblue,
                               FontAwesomeIcons.code,
                               'Confirm',
-                              handleSignIn)
+                              handleSignIn,1)
                         ],
                       ),
                     );

@@ -30,9 +30,13 @@ class _SettingPageState extends State<SettingPage> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           checklogin = snapshot.data ?? false;
-          return checklogin
-              ? const SettingWithLogin()
-              : const OpResLogin();
+          return OrientationBuilder(builder: (context, orientation) {
+            if (orientation == Orientation.portrait) {
+              return checklogin ? const SettingWithLogin() : const OpResLogin(orientaion: 1,);
+            } else {
+              return checklogin ? const SettingWithLogin() : const OpResLogin(orientaion: 2,);
+            }
+          });
         } else {
           return const Center(
             child: CircularProgressIndicator(

@@ -26,15 +26,6 @@ class _VocabListState extends State<VocabList> {
 
   _VocabListState({required this.cateId, required this.cateName});
 
-  @override
-  void initState() {
-    super.initState();
-    //getData();
-  }
-
-  void getData() async {
-    await getVocabListFromFirebase();
-  }
 
   Future<void> getVocabListFromFirebase() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance

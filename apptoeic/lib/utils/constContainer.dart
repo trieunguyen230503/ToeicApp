@@ -6,10 +6,14 @@ import 'package:intl/intl.dart';
 
 class inputEmailProfile extends StatefulWidget {
   const inputEmailProfile(
-      {super.key, required this.hint, required this.inputcontroller});
+      {super.key,
+      required this.hint,
+      required this.inputcontroller,
+      required this.orientation});
 
   final hint;
   final inputcontroller;
+  final orientation;
 
   @override
   State<inputEmailProfile> createState() => _inputEmailProfileState();
@@ -18,25 +22,55 @@ class inputEmailProfile extends StatefulWidget {
 class _inputEmailProfileState extends State<inputEmailProfile> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.085,
-      padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.06, 0,
-          MediaQuery.of(context).size.width * 0.06, 0),
-      child: TextFormField(
-        controller: widget.inputcontroller,
-        enabled: false,
-        decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+    return widget.orientation == 1
+        ? Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.085,
+            padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.06,
+                0,
+                MediaQuery.of(context).size.width * 0.06,
+                0),
+            child: TextFormField(
+              controller: widget.inputcontroller,
+              enabled: false,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  hintText: widget.hint,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: darkblue),
+                    borderRadius: BorderRadius.circular(10),
+                  )),
             ),
-            hintText: widget.hint,
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: darkblue),
-              borderRadius: BorderRadius.circular(10),
-            )),
-      ),
-    );
+          )
+        : Container(
+            // width: MediaQuery.of(context).size.width,
+            margin: EdgeInsets.only(
+                right: MediaQuery.sizeOf(context).height * 0.02,
+                left: MediaQuery.sizeOf(context).height * 0.02),
+            alignment: Alignment.center,
+            height: MediaQuery.sizeOf(context).width * 0.1,
+            padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.06,
+                0,
+                MediaQuery.of(context).size.width * 0.06,
+                0),
+            child: TextFormField(
+              controller: widget.inputcontroller,
+              enabled: false,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  hintText: widget.hint,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: darkblue),
+                    borderRadius: BorderRadius.circular(10),
+                  )),
+            ),
+          );
   }
 }
 
@@ -45,11 +79,13 @@ class inputDecoration extends StatefulWidget {
       {super.key,
       required this.hint,
       required this.inputcontroller,
-      required this.enable});
+      required this.enable,
+      required this.orientation});
 
   final hint;
   final inputcontroller;
   final enable;
+  final orientation;
 
   @override
   State<inputDecoration> createState() => _inputDecorationState();
@@ -58,25 +94,55 @@ class inputDecoration extends StatefulWidget {
 class _inputDecorationState extends State<inputDecoration> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.085,
-      padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.06, 0,
-          MediaQuery.of(context).size.width * 0.06, 0),
-      child: TextFormField(
-        enabled: widget.enable,
-        controller: widget.inputcontroller,
-        decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+    return widget.orientation == 1
+        ? Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.085,
+            padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.06,
+                0,
+                MediaQuery.of(context).size.width * 0.06,
+                0),
+            child: TextFormField(
+              enabled: widget.enable,
+              controller: widget.inputcontroller,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  hintText: widget.hint,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: darkblue),
+                    borderRadius: BorderRadius.circular(10),
+                  )),
             ),
-            hintText: widget.hint,
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: darkblue),
-              borderRadius: BorderRadius.circular(10),
-            )),
-      ),
-    );
+          )
+        : Container(
+            //width: MediaQuery.of(context).size.width,
+            margin: EdgeInsets.only(
+                right: MediaQuery.sizeOf(context).height * 0.02,
+                left: MediaQuery.sizeOf(context).height * 0.02),
+            alignment: Alignment.center,
+            height: MediaQuery.sizeOf(context).width * 0.1,
+            padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.06,
+                0,
+                MediaQuery.of(context).size.width * 0.06,
+                0),
+            child: TextFormField(
+              enabled: widget.enable,
+              controller: widget.inputcontroller,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  hintText: widget.hint,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: darkblue),
+                    borderRadius: BorderRadius.circular(10),
+                  )),
+            ),
+          );
   }
 }
 
@@ -85,11 +151,13 @@ class inputDecorationPassword extends StatefulWidget {
       {super.key,
       required this.passwordHint,
       required this.passwordController,
-      required this.enable});
+      required this.enable,
+      required this.orientation});
 
   final passwordHint;
   final passwordController;
   final enable;
+  final orientation;
 
   @override
   State<inputDecorationPassword> createState() =>
@@ -102,42 +170,89 @@ class _inputDecorationPasswordState extends State<inputDecorationPassword> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.085,
-      padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.06, 0,
-          MediaQuery.of(context).size.width * 0.06, 0),
-      child: TextFormField(
-        enabled: widget.enable,
-        obscureText: _obscureText,
-        controller: widget.passwordController,
-        onTap: () {
-          setState(() {
-            _isInputFocused = true;
-          });
-        },
-        decoration: InputDecoration(
-            suffixIcon: GestureDetector(
+    return widget.orientation == 1
+        ? Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.085,
+            padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.06,
+                0,
+                MediaQuery.of(context).size.width * 0.06,
+                0),
+            child: TextFormField(
+              enabled: widget.enable,
+              obscureText: _obscureText,
+              controller: widget.passwordController,
               onTap: () {
                 setState(() {
-                  _obscureText = !_obscureText;
+                  _isInputFocused = true;
                 });
               },
-              child: Icon(
-                _obscureText ? Icons.visibility_off : Icons.visibility,
-                color: _isInputFocused ? darkblue : Colors.grey,
-              ),
+              decoration: InputDecoration(
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                    child: Icon(
+                      _obscureText ? Icons.visibility_off : Icons.visibility,
+                      color: _isInputFocused ? darkblue : Colors.grey,
+                    ),
+                  ),
+                  hintText: widget.passwordHint,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: darkblue),
+                    borderRadius: BorderRadius.circular(10),
+                  )),
             ),
-            hintText: widget.passwordHint,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+          )
+        : Container(
+            //width: MediaQuery.of(context).size.width,
+            margin: EdgeInsets.only(
+                right: MediaQuery.sizeOf(context).height * 0.02,
+                left: MediaQuery.sizeOf(context).height * 0.02),
+            alignment: Alignment.center,
+            height: MediaQuery.sizeOf(context).width * 0.1,
+            padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.06,
+                0,
+                MediaQuery.of(context).size.width * 0.06,
+                0),
+            child: TextFormField(
+              enabled: widget.enable,
+              obscureText: _obscureText,
+              controller: widget.passwordController,
+              onTap: () {
+                setState(() {
+                  _isInputFocused = true;
+                });
+              },
+              decoration: InputDecoration(
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                    child: Icon(
+                      _obscureText ? Icons.visibility_off : Icons.visibility,
+                      color: _isInputFocused ? darkblue : Colors.grey,
+                    ),
+                  ),
+                  hintText: widget.passwordHint,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: darkblue),
+                    borderRadius: BorderRadius.circular(10),
+                  )),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: darkblue),
-              borderRadius: BorderRadius.circular(10),
-            )),
-      ),
-    );
+          );
   }
 }
 
@@ -146,11 +261,13 @@ class inputPhoneNumber extends StatefulWidget {
       {super.key,
       required this.hint,
       required this.phoneController,
-      required this.enable});
+      required this.enable,
+      required this.orientation});
 
   final enable;
   final hint;
   final phoneController;
+  final orientation;
 
   @override
   State<inputPhoneNumber> createState() => _inputPhoneNumberState();
@@ -161,49 +278,103 @@ class _inputPhoneNumberState extends State<inputPhoneNumber> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.085,
-      padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.06, 0,
-          MediaQuery.of(context).size.width * 0.06, 0),
-      child: TextFormField(
-        enabled: widget.enable,
-        keyboardType: TextInputType.number,
-        controller: widget.phoneController,
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          LengthLimitingTextInputFormatter(9)
-        ],
-        onTap: () {
-          setState(() {
-            _isInputFocused = true;
-          });
-        },
-        decoration: InputDecoration(
-          prefixIcon: Container(
-            width: 50,
-            height: 20,
-            alignment: Alignment.center,
-            child: Text(
-              '+84',
-              style: TextStyle(
-                color: _isInputFocused ? darkblue : Colors.grey,
+    return widget.orientation == 1
+        ? Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.085,
+            padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.06,
+                0,
+                MediaQuery.of(context).size.width * 0.06,
+                0),
+            child: TextFormField(
+              enabled: widget.enable,
+              keyboardType: TextInputType.number,
+              controller: widget.phoneController,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(9)
+              ],
+              onTap: () {
+                setState(() {
+                  _isInputFocused = true;
+                });
+              },
+              decoration: InputDecoration(
+                prefixIcon: Container(
+                  width: 50,
+                  height: 20,
+                  alignment: Alignment.center,
+                  child: Text(
+                    '+84',
+                    style: TextStyle(
+                      color: _isInputFocused ? darkblue : Colors.grey,
+                    ),
+                  ),
+                ),
+
+                // Có thể thay đổi màu sắc của tiền tố tùy ý
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: darkblue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                hintText: widget.hint,
               ),
             ),
-          ),
+          )
+        : Container(
+            //width: MediaQuery.of(context).size.width,
+            margin: EdgeInsets.only(
+                right: MediaQuery.sizeOf(context).height * 0.02,
+                left: MediaQuery.sizeOf(context).height * 0.02),
+            alignment: Alignment.center,
+            height: MediaQuery.sizeOf(context).width * 0.1,
+            padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.06,
+                0,
+                MediaQuery.of(context).size.width * 0.06,
+                0),
+            child: TextFormField(
+              enabled: widget.enable,
+              keyboardType: TextInputType.number,
+              controller: widget.phoneController,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(9)
+              ],
+              onTap: () {
+                setState(() {
+                  _isInputFocused = true;
+                });
+              },
+              decoration: InputDecoration(
+                prefixIcon: Container(
+                  width: 50,
+                  height: 20,
+                  alignment: Alignment.center,
+                  child: Text(
+                    '+84',
+                    style: TextStyle(
+                      color: _isInputFocused ? darkblue : Colors.grey,
+                    ),
+                  ),
+                ),
 
-          // Có thể thay đổi màu sắc của tiền tố tùy ý
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: darkblue),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          hintText: widget.hint,
-        ),
-      ),
-    );
+                // Có thể thay đổi màu sắc của tiền tố tùy ý
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: darkblue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                hintText: widget.hint,
+              ),
+            ),
+          );
   }
 }
 
@@ -212,11 +383,13 @@ class inputDOB extends StatefulWidget {
       {super.key,
       required this.hint,
       required this.dobController,
-      required this.enable});
+      required this.enable,
+      required this.orientation});
 
   final hint;
   final dobController;
   final enable;
+  final orientation;
 
   @override
   State<inputDOB> createState() => _inputDOBState();
@@ -246,38 +419,78 @@ class _inputDOBState extends State<inputDOB> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.085,
-      padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.06, 0,
-          MediaQuery.of(context).size.width * 0.06, 0),
-      child: TextFormField(
-        enabled: widget.enable,
-        keyboardType: TextInputType.datetime,
-        controller: widget.dobController,
-        decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+    return widget.orientation == 1
+        ? Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.085,
+            padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.06,
+                0,
+                MediaQuery.of(context).size.width * 0.06,
+                0),
+            child: TextFormField(
+              enabled: widget.enable,
+              keyboardType: TextInputType.datetime,
+              controller: widget.dobController,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: darkblue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  hintText: widget.hint,
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.calendar_today),
+                    onPressed: () => _selectDate(context),
+                  )),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: darkblue),
-              borderRadius: BorderRadius.circular(10),
+          )
+        : Container(
+            //width: MediaQuery.of(context).size.width,
+            margin: EdgeInsets.only(
+                right: MediaQuery.sizeOf(context).height * 0.02,
+                left: MediaQuery.sizeOf(context).height * 0.02),
+            alignment: Alignment.center,
+            height: MediaQuery.sizeOf(context).width * 0.1,
+            padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.06,
+                0,
+                MediaQuery.of(context).size.width * 0.06,
+                0),
+            child: TextFormField(
+              enabled: widget.enable,
+              keyboardType: TextInputType.datetime,
+              controller: widget.dobController,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: darkblue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  hintText: widget.hint,
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.calendar_today),
+                    onPressed: () => _selectDate(context),
+                  )),
             ),
-            hintText: widget.hint,
-            suffixIcon: IconButton(
-              icon: const Icon(Icons.calendar_today),
-              onPressed: () => _selectDate(context),
-            )),
-      ),
-    );
+          );
   }
 }
 
 class SettingContainer extends StatefulWidget {
-  const SettingContainer({super.key, required this.icon, required this.hint});
+  const SettingContainer(
+      {super.key,
+      required this.icon,
+      required this.hint,
+      required this.orientation});
 
   final icon;
   final hint;
+  final orientation;
 
   @override
   State<SettingContainer> createState() => _SettingContainerState();
@@ -286,23 +499,44 @@ class SettingContainer extends StatefulWidget {
 class _SettingContainerState extends State<SettingContainer> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-          right: MediaQuery.sizeOf(context).height * 0.02,
-          left: MediaQuery.sizeOf(context).height * 0.02),
-      alignment: Alignment.center,
-      height: MediaQuery.sizeOf(context).height * 0.09,
-      decoration: const BoxDecoration(
-          border: Border(
-              //bottom: BorderSide(color: Colors.grey, width: 0.5),
-              top: BorderSide(color: Colors.grey, width: 0.5))),
-      child: ListTile(
-        title: Text(widget.hint.toString()),
-        leading: Icon(
-          widget.icon,
-          color: darkblue,
+    if (widget.orientation == 1) {
+      return Container(
+        margin: EdgeInsets.only(
+            right: MediaQuery.sizeOf(context).height * 0.02,
+            left: MediaQuery.sizeOf(context).height * 0.02),
+        alignment: Alignment.center,
+        height: MediaQuery.sizeOf(context).height * 0.09,
+        decoration: const BoxDecoration(
+            border: Border(
+                //bottom: BorderSide(color: Colors.grey, width: 0.5),
+                top: BorderSide(color: Colors.grey, width: 0.5))),
+        child: ListTile(
+          title: Text(widget.hint.toString()),
+          leading: Icon(
+            widget.icon,
+            color: darkblue,
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Container(
+        margin: EdgeInsets.only(
+            right: MediaQuery.sizeOf(context).height * 0.02,
+            left: MediaQuery.sizeOf(context).height * 0.02),
+        alignment: Alignment.center,
+        height: MediaQuery.sizeOf(context).width * 0.1,
+        decoration: const BoxDecoration(
+            border: Border(
+                //bottom: BorderSide(color: Colors.grey, width: 0.5),
+                top: BorderSide(color: Colors.grey, width: 0.5))),
+        child: ListTile(
+          title: Text(widget.hint.toString()),
+          leading: Icon(
+            widget.icon,
+            color: darkblue,
+          ),
+        ),
+      );
+    }
   }
 }

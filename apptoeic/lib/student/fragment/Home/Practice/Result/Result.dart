@@ -24,7 +24,7 @@ class Result extends StatefulWidget {
   State<Result> createState() => _ResultState();
 }
 
-class _ResultState extends State<Result> {
+class _ResultState extends State<Result> with AutomaticKeepAliveClientMixin{
   int numberCorrectAnswer = 0;
 
   @override
@@ -87,144 +87,317 @@ class _ResultState extends State<Result> {
             future: saveHistory(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return Container(
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.sizeOf(context).height * 0.05,
+                return OrientationBuilder(builder: (context, orientation) {
+                  if (orientation == Orientation.portrait) {
+                    return Container(
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 0.05,
+                          ),
+                          SizedBox(
+                            //color: Colors.red,
+                            width: MediaQuery.sizeOf(context).width * 0.4,
+                            height: MediaQuery.sizeOf(context).height * 0.3,
+                            child: Image.asset(
+                              Config.logo,
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                                style: const TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.bold),
+                                children: <TextSpan>[
+                                  const TextSpan(
+                                      text: 'Training ',
+                                      style: TextStyle(color: Colors.black)),
+                                  TextSpan(
+                                      text: widget.type,
+                                      style: const TextStyle(
+                                          color:
+                                              Color.fromRGBO(249, 192, 52, 1))),
+                                ]),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 0.02,
+                          ),
+                          const Text(
+                            'Accomplished!',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 0.02,
+                          ),
+                          Container(
+                              width: MediaQuery.sizeOf(context).width * 0.8,
+                              height: MediaQuery.sizeOf(context).height * 0.15,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(18),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.25),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: const Offset(0, 2),
+                                    )
+                                  ]),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left:
+                                        MediaQuery.sizeOf(context).width * 0.06,
+                                    right:
+                                        MediaQuery.sizeOf(context).width * 0.01,
+                                    top: MediaQuery.sizeOf(context).height *
+                                        0.03,
+                                    bottom: MediaQuery.sizeOf(context).height *
+                                        0.03),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    RichText(
+                                        text: TextSpan(
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20),
+                                            children: <TextSpan>[
+                                          const TextSpan(
+                                              text: 'Result:  ',
+                                              style: TextStyle(
+                                                  fontStyle: FontStyle.italic)),
+                                          TextSpan(
+                                            text: '${numberCorrectAnswer}',
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20),
+                                          ),
+                                          TextSpan(
+                                            text:
+                                                '/${widget.answerList.length}',
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20),
+                                          )
+                                        ])),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.02,
+                                    ),
+                                    RichText(
+                                        text: TextSpan(
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20),
+                                            children: <TextSpan>[
+                                          const TextSpan(
+                                              text: 'Your correct rate:  ',
+                                              style: TextStyle(
+                                                  fontStyle: FontStyle.italic)),
+                                          TextSpan(
+                                              text:
+                                                  '${double.parse((numberCorrectAnswer * 100 / widget.answerList.length).toStringAsFixed(2))}%',
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ))
+                                        ]))
+                                  ],
+                                ),
+                              )),
+                          SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 0.03,
+                          ),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: darkblue,
+                                  fixedSize: Size(
+                                      MediaQuery.sizeOf(context).width * 0.5,
+                                      MediaQuery.sizeOf(context).height * 0.07),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50))),
+                              onPressed: () {
+                                nextScreen(
+                                    context,
+                                    ShowAnswers(
+                                      answerList: widget.answerList,
+                                      lstQuestion: widget.lstQuestion,
+                                    ));
+                              },
+                              child: const Text(
+                                'View the answers',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ))
+                        ],
                       ),
-                      SizedBox(
-                        //color: Colors.red,
-                        width: MediaQuery.sizeOf(context).width * 0.4,
-                        height: MediaQuery.sizeOf(context).height * 0.3,
-                        child: Image.asset(
-                          Config.logo,
+                    );
+                  } else {
+                    return SingleChildScrollView(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.05,
+                            ),
+                            SizedBox(
+                              //color: Colors.red,
+                              width: MediaQuery.sizeOf(context).width * 0.4,
+                              height: MediaQuery.sizeOf(context).height * 0.3,
+                              child: Image.asset(
+                                Config.logo,
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold),
+                                  children: <TextSpan>[
+                                    const TextSpan(
+                                        text: 'Training ',
+                                        style: TextStyle(color: Colors.black)),
+                                    TextSpan(
+                                        text: widget.type,
+                                        style: const TextStyle(
+                                            color: Color.fromRGBO(
+                                                249, 192, 52, 1))),
+                                  ]),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.02,
+                            ),
+                            const Text(
+                              'Accomplished!',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.02,
+                            ),
+                            Container(
+                                width: MediaQuery.sizeOf(context).width * 0.8,
+                                height: MediaQuery.sizeOf(context).height * 0.3,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(18),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.25),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: const Offset(0, 2),
+                                      )
+                                    ]),
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: MediaQuery.sizeOf(context).width *
+                                          0.06,
+                                      right: MediaQuery.sizeOf(context).width *
+                                          0.01,
+                                      top: MediaQuery.sizeOf(context).height *
+                                          0.03,
+                                      bottom:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.03),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      RichText(
+                                          text: TextSpan(
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20),
+                                              children: <TextSpan>[
+                                            const TextSpan(
+                                                text: 'Result:  ',
+                                                style: TextStyle(
+                                                    fontStyle:
+                                                        FontStyle.italic)),
+                                            TextSpan(
+                                              text: '${numberCorrectAnswer}',
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20),
+                                            ),
+                                            TextSpan(
+                                              text:
+                                                  '/${widget.answerList.length}',
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20),
+                                            )
+                                          ])),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.sizeOf(context).height *
+                                                0.02,
+                                      ),
+                                      RichText(
+                                          text: TextSpan(
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20),
+                                              children: <TextSpan>[
+                                            const TextSpan(
+                                                text: 'Your correct rate:  ',
+                                                style: TextStyle(
+                                                    fontStyle:
+                                                        FontStyle.italic)),
+                                            TextSpan(
+                                                text:
+                                                    '${double.parse((numberCorrectAnswer * 100 / widget.answerList.length).toStringAsFixed(2))}%',
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ))
+                                          ]))
+                                    ],
+                                  ),
+                                )),
+                            SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.03,
+                            ),
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: darkblue,
+                                    fixedSize: Size(
+                                        MediaQuery.sizeOf(context).width * 0.25,
+                                        MediaQuery.sizeOf(context).height *
+                                            0.15),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(50))),
+                                onPressed: () {
+                                  nextScreen(
+                                      context,
+                                      ShowAnswers(
+                                        answerList: widget.answerList,
+                                        lstQuestion: widget.lstQuestion,
+                                      ));
+                                },
+                                child: const Text(
+                                  'View the answers',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 16),
+                                )),
+                            SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.06,
+                            ),
+                          ],
                         ),
                       ),
-                      RichText(
-                        text: TextSpan(
-                            style: const TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                            children: <TextSpan>[
-                              const TextSpan(
-                                  text: 'Training ',
-                                  style: TextStyle(color: Colors.black)),
-                              TextSpan(
-                                  text: widget.type,
-                                  style: const TextStyle(
-                                      color: Color.fromRGBO(249, 192, 52, 1))),
-                            ]),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.sizeOf(context).height * 0.02,
-                      ),
-                      const Text(
-                        'Accomplished!',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.sizeOf(context).height * 0.02,
-                      ),
-                      Container(
-                          width: MediaQuery.sizeOf(context).width * 0.8,
-                          height: MediaQuery.sizeOf(context).height * 0.15,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(18),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.25),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 2),
-                                )
-                              ]),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                left: MediaQuery.sizeOf(context).width * 0.06,
-                                right: MediaQuery.sizeOf(context).width * 0.01,
-                                top: MediaQuery.sizeOf(context).height * 0.03,
-                                bottom:
-                                    MediaQuery.sizeOf(context).height * 0.03),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                RichText(
-                                    text: TextSpan(
-                                        style: const TextStyle(
-                                            color: Colors.black, fontSize: 20),
-                                        children: <TextSpan>[
-                                      const TextSpan(
-                                          text: 'Result:  ',
-                                          style: TextStyle(
-                                              fontStyle: FontStyle.italic)),
-                                      TextSpan(
-                                        text: '${numberCorrectAnswer}',
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      ),
-                                      TextSpan(
-                                        text: '/${widget.answerList.length}',
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      )
-                                    ])),
-                                SizedBox(
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.02,
-                                ),
-                                RichText(
-                                    text: TextSpan(
-                                        style: const TextStyle(
-                                            color: Colors.black, fontSize: 20),
-                                        children: <TextSpan>[
-                                      const TextSpan(
-                                          text: 'Your correct rate:  ',
-                                          style: TextStyle(
-                                              fontStyle: FontStyle.italic)),
-                                      TextSpan(
-                                          text:
-                                              '${double.parse((numberCorrectAnswer * 100 / widget.answerList.length).toStringAsFixed(2))}%',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ))
-                                    ]))
-                              ],
-                            ),
-                          )),
-                      SizedBox(
-                        height: MediaQuery.sizeOf(context).height * 0.03,
-                      ),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: darkblue,
-                              fixedSize: Size(
-                                  MediaQuery.sizeOf(context).width * 0.5,
-                                  MediaQuery.sizeOf(context).height * 0.07),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50))),
-                          onPressed: () {
-                            nextScreen(
-                                context,
-                                ShowAnswers(
-                                  answerList: widget.answerList,
-                                  lstQuestion: widget.lstQuestion,
-                                ));
-                          },
-                          child: const Text(
-                            'View the answers',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ))
-                    ],
-                  ),
-                );
+                    );
+                  }
+                });
               } else {
                 return const Center(
                   child: CircularProgressIndicator(
@@ -235,4 +408,8 @@ class _ResultState extends State<Result> {
               }
             }));
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

@@ -32,79 +32,141 @@ class _RenewPasswordState extends State<RenewPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.keyboard_arrow_left,
-            color: Colors.black,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(
+              Icons.keyboard_arrow_left,
+              color: Colors.white,
+            ),
+            // Đổi icon về
+            onPressed: () {
+              // Xử lý khi người dùng nhấn vào icon trở về
+            },
           ),
-          // Đổi icon về
-          onPressed: () {
-            // Xử lý khi người dùng nhấn vào icon trở về
-          },
+          backgroundColor: darkblue,
+          centerTitle: true,
+          title: const Text(
+            'RENEW PASSWORD',
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
         ),
-        backgroundColor: Color.fromRGBO(247, 247, 247, 1.0),
-        centerTitle: true,
-        title: const Text(
-          'RENEW PASSWORD',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.15,
-            ),
-            Image.asset(
-              Config.logo,
-              width: 120,
-              height: 120,
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            inputDecorationPassword(
-              passwordHint: 'Password',
-              passwordController: password,
-              enable: enable,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            inputDecorationPassword(
-              passwordHint: 'Confirm',
-              passwordController: confirmpassword,
-              enable: enable,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            buttonRounded(context, renewPassowrd, darkblue,
-                FontAwesomeIcons.check, 'Renew Password', updateData),
-            const SizedBox(
-              height: 10,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const StudentMainPage()));
-              },
-              child: Container(
-                margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                child: const Text('Return Home page ',
-                    style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        fontWeight: FontWeight.bold)),
+        body: OrientationBuilder(builder: (context, orientation) {
+          if (orientation == Orientation.portrait) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 0.15,
+                  ),
+                  Image.asset(
+                    Config.logo,
+                    width: 120,
+                    height: 120,
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  inputDecorationPassword(
+                    passwordHint: 'Password',
+                    passwordController: password,
+                    enable: enable,
+                    orientation: 1,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  inputDecorationPassword(
+                    passwordHint: 'Confirm',
+                    passwordController: confirmpassword,
+                    enable: enable,
+                    orientation: 1,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  buttonRounded(context, renewPassowrd, darkblue,
+                      FontAwesomeIcons.check, 'Renew Password', updateData, 1),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const StudentMainPage()));
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                      child: const Text('Return Home page ',
+                          style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            );
+          } else {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 0.15,
+                  ),
+                  Image.asset(
+                    Config.logo,
+                    width: 120,
+                    height: 120,
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  inputDecorationPassword(
+                    passwordHint: 'Password',
+                    passwordController: password,
+                    enable: enable,
+                    orientation: 2,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  inputDecorationPassword(
+                    passwordHint: 'Confirm',
+                    passwordController: confirmpassword,
+                    enable: enable,
+                    orientation: 2,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  buttonRounded(context, renewPassowrd, darkblue,
+                      FontAwesomeIcons.check, 'Renew Password', updateData, 2),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const StudentMainPage()));
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                      child: const Text('Return Home page ',
+                          style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        }));
   }
 
   void updateData() async {

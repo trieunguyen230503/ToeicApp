@@ -14,12 +14,14 @@ class ItemHomePage extends StatefulWidget {
       required this.title,
       required this.lstImg,
       required this.lstHeadline,
-      required this.lstWiget});
+      required this.lstWiget,
+      required this.itemPerRow});
 
   final title;
   final lstImg;
   final lstHeadline;
   final lstWiget;
+  final itemPerRow;
 
   @override
   State<ItemHomePage> createState() => _ItemHomePageState();
@@ -43,11 +45,20 @@ class _ItemHomePageState extends State<ItemHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double h;
+    double w;
+
+    if (widget.itemPerRow == 2) {
+      h = MediaQuery.sizeOf(context).height * 3;
+      w = MediaQuery.sizeOf(context).width;
+    } else {
+      h = MediaQuery.sizeOf(context).height;
+      w = MediaQuery.sizeOf(context).width;
+    }
+
     return Container(
-      height: MediaQuery.sizeOf(context).height *
-          0.23 *
-          (widget.lstImg.length / 4).ceil(),
-      width: MediaQuery.sizeOf(context).width,
+      height: h * 0.23 * (widget.lstImg.length / 4).ceil(),
+      width: w,
       padding: EdgeInsets.fromLTRB(
         MediaQuery.of(context).size.width * 0.02,
         0,
@@ -67,24 +78,24 @@ class _ItemHomePageState extends State<ItemHomePage> {
               child: Text(
                 widget.title.toString(),
                 style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 18),
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
               ),
             ),
-            SizedBox(
+            Container(
                 //color: Colors.cyan,
-                height: MediaQuery.sizeOf(context).height *
-                    0.175 *
-                    (widget.lstImg.length / 4).ceil(),
-                width: MediaQuery.sizeOf(context).width,
+                height: h * 0.175 * (widget.lstImg.length / 4).ceil(),
+                width: w,
                 child: GridView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: widget.lstHeadline.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 4,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 5,
-                            childAspectRatio: 1 / 1.8),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                        crossAxisSpacing: widget.itemPerRow == 2 ? 60 : 10,
+                        mainAxisSpacing: 5,
+                        childAspectRatio:
+                            widget.itemPerRow == 2 ? 1 / 1.6 : 1 / 1.8),
                     itemBuilder: (BuildContext context, int index) {
                       return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,9 +113,8 @@ class _ItemHomePageState extends State<ItemHomePage> {
                                   Stack(alignment: Alignment.center, children: [
                                 Positioned(
                                   child: Container(
-                                    width: MediaQuery.sizeOf(context).width / 4,
-                                    height: MediaQuery.sizeOf(context).height *
-                                        0.09,
+                                    width: w / 4,
+                                    height: h * 0.09,
                                     decoration: BoxDecoration(
                                         color: optionItemColor,
                                         borderRadius: BorderRadius.circular(12),
@@ -120,10 +130,8 @@ class _ItemHomePageState extends State<ItemHomePage> {
                                 ),
                                 Positioned(
                                   child: Image.asset(
-                                    width:
-                                        MediaQuery.sizeOf(context).width / 4.6,
-                                    height: MediaQuery.sizeOf(context).height *
-                                        0.05,
+                                    width: w / 4.6,
+                                    height: h * 0.05,
                                     widget.lstImg[index].toString(),
                                   ),
                                 )
@@ -137,7 +145,8 @@ class _ItemHomePageState extends State<ItemHomePage> {
                               child: Text(
                                 widget.lstHeadline[index],
                                 style: TextStyle(
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 13),
                               ),

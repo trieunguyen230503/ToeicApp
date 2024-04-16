@@ -103,80 +103,181 @@ class _ProfileCustomeState extends State<ProfileCustome> {
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: MediaQuery.sizeOf(context).height * 0.08,
-              ),
-              Stack(
+        body: OrientationBuilder(builder: (context, orientation) {
+          if (orientation == Orientation.portrait) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  pickedFile != null
-                      ? ClipOval(
-                          child: Container(
-                          width: 120.0,
-                          height: 120.0,
-                          color: Colors.blue,
-                          child: Image.file(
-                            File(pickedFile!.path!),
-                            // Thay đổi đường dẫn hình ảnh của bạn ở đây
-                            fit: BoxFit.cover,
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 0.08,
+                  ),
+                  Stack(
+                    children: [
+                      pickedFile != null
+                          ? ClipOval(
+                              child: Container(
+                              width: 120.0,
+                              height: 120.0,
+                              color: Colors.blue,
+                              child: Image.file(
+                                File(pickedFile!.path!),
+                                // Thay đổi đường dẫn hình ảnh của bạn ở đây
+                                fit: BoxFit.cover,
+                              ),
+                            ))
+                          : CircleAvatar(
+                              radius: 64,
+                              backgroundImage:
+                                  NetworkImage(sp.imageUrl.toString()),
+                            ),
+                      Positioned(
+                        bottom: -10,
+                        left: 80,
+                        child: IconButton(
+                          onPressed: () async {
+                            await selectImage();
+                          },
+                          icon: const Icon(
+                            Icons.add_a_photo,
+                            color: Colors.black,
                           ),
-                        ))
-                      : CircleAvatar(
-                          radius: 64,
-                          backgroundImage: NetworkImage(sp.imageUrl.toString()),
                         ),
-                  Positioned(
-                    bottom: -10,
-                    left: 80,
-                    child: IconButton(
-                      onPressed: () async {
-                        await selectImage();
-                      },
-                      icon: const Icon(
-                        Icons.add_a_photo,
-                        color: Colors.black,
                       ),
-                    ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  inputEmailProfile(
+                    hint: 'Enter your email',
+                    inputcontroller: email,
+                    orientation: 1,
+                  ),
+                  inputDecoration(
+                    hint: 'Enter your name',
+                    inputcontroller: name,
+                    enable: true,
+                    orientation: 1,
+                  ),
+                  inputPhoneNumber(
+                    hint: 'Enter your phone',
+                    phoneController: phone,
+                    enable: true,
+                    orientation: 1,
+                  ),
+                  inputDecoration(
+                    hint: 'Enter your address',
+                    inputcontroller: address,
+                    enable: true,
+                    orientation: 1,
+                  ),
+                  inputDOB(
+                    hint: 'Enter your dob',
+                    dobController: dob,
+                    enable: true,
+                    orientation: 1,
+                  ),
+                  buttonRounded(
+                      context,
+                      updateController,
+                      darkblue,
+                      FontAwesomeIcons.registered,
+                      'Update your profile',
+                      handleUpdateProfile,
+                      1),
+                ],
+              ),
+            );
+          } else {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 0.08,
+                  ),
+                  Stack(
+                    children: [
+                      pickedFile != null
+                          ? ClipOval(
+                              child: Container(
+                              width: 120.0,
+                              height: 120.0,
+                              color: Colors.blue,
+                              child: Image.file(
+                                File(pickedFile!.path!),
+                                // Thay đổi đường dẫn hình ảnh của bạn ở đây
+                                fit: BoxFit.cover,
+                              ),
+                            ))
+                          : CircleAvatar(
+                              radius: 64,
+                              backgroundImage:
+                                  NetworkImage(sp.imageUrl.toString()),
+                            ),
+                      Positioned(
+                        bottom: -10,
+                        left: 80,
+                        child: IconButton(
+                          onPressed: () async {
+                            await selectImage();
+                          },
+                          icon: const Icon(
+                            Icons.add_a_photo,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  inputEmailProfile(
+                    hint: 'Enter your email',
+                    inputcontroller: email,
+                    orientation: 2,
+                  ),
+                  inputDecoration(
+                    hint: 'Enter your name',
+                    inputcontroller: name,
+                    enable: true,
+                    orientation: 2,
+                  ),
+                  inputPhoneNumber(
+                    hint: 'Enter your phone',
+                    phoneController: phone,
+                    enable: true,
+                    orientation: 2,
+                  ),
+                  inputDecoration(
+                    hint: 'Enter your address',
+                    inputcontroller: address,
+                    enable: true,
+                    orientation: 2,
+                  ),
+                  inputDOB(
+                    hint: 'Enter your dob',
+                    dobController: dob,
+                    enable: true,
+                    orientation: 2,
+                  ),
+                  buttonRounded(
+                      context,
+                      updateController,
+                      darkblue,
+                      FontAwesomeIcons.registered,
+                      'Update your profile',
+                      handleUpdateProfile,
+                      2),
+                  const SizedBox(
+                    height: 50,
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 50,
-              ),
-              inputEmailProfile(
-                  hint: 'Enter your email', inputcontroller: email),
-              inputDecoration(
-                hint: 'Enter your name',
-                inputcontroller: name,
-                enable: true,
-              ),
-              inputPhoneNumber(
-                hint: 'Enter your phone',
-                phoneController: phone,
-                enable: true,
-              ),
-              inputDecoration(
-                hint: 'Enter your address',
-                inputcontroller: address,
-                enable: true,
-              ),
-              inputDOB(
-                hint: 'Enter your dob',
-                dobController: dob,
-                enable: true,
-              ),
-              buttonRounded(
-                  context,
-                  updateController,
-                  darkblue,
-                  FontAwesomeIcons.registered,
-                  'Update your profile',
-                  handleUpdateProfile),
-            ],
-          ),
-        ));
+            );
+          }
+        }));
   }
 }

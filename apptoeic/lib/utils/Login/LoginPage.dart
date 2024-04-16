@@ -76,94 +76,193 @@ class _LoginState extends State<Login> {
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
-            child: Form(
-              key: _scaffoldKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage(Config.logo),
-                    height: 100,
-                    width: 100,
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  inputDecoration(
-                    hint: 'Enter your email',
-                    inputcontroller: userName,
-                    enable: enable,
-                  ),
-                  inputDecorationPassword(
-                    passwordHint: "Password",
-                    passwordController: password,
-                    enable: enable,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  buttonRounded(context, loginController, darkblue, Icons.login,
-                      'Login', login),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  buttonRounded(
-                      context,
-                      googleController,
-                      Colors.red,
-                      FontAwesomeIcons.google,
-                      'Sign in with google',
-                      handleGoogle),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  buttonRounded(
-                      context,
-                      phoneController,
-                      Colors.black,
-                      FontAwesomeIcons.phone,
-                      'Sign in with phone number',
-                      nextScrenLoginByPhoneNumber),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      nextScreen(context, const ForgetPassword());
-                    },
-                    child: const Text('I forgot my password',
-                        style: TextStyle(fontSize: 15, color: darkblue)),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      nextScreen(context, const Register());
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                      child: const Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+        body: OrientationBuilder(builder: (context, orientation) {
+          if (orientation == Orientation.portrait) {
+            return SingleChildScrollView(
+                child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+                    child: Form(
+                        key: _scaffoldKey,
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('Don\'t have an account? ',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                )),
-                            Text('Sign up',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                    color: darkblue)),
-                          ]),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ));
+                            Image(
+                              image: AssetImage(Config.logo),
+                              height: 100,
+                              width: 100,
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            inputDecoration(
+                              hint: 'Enter your email',
+                              inputcontroller: userName,
+                              enable: enable,
+                              orientation: 1,
+                            ),
+                            inputDecorationPassword(
+                              passwordHint: "Password",
+                              passwordController: password,
+                              enable: enable,
+                              orientation: 1,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            buttonRounded(context, loginController, darkblue,
+                                Icons.login, 'Login', login, 1),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            buttonRounded(
+                                context,
+                                googleController,
+                                Colors.red,
+                                FontAwesomeIcons.google,
+                                'Sign in with google',
+                                handleGoogle,
+                                1),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            buttonRounded(
+                                context,
+                                phoneController,
+                                Colors.black,
+                                FontAwesomeIcons.phone,
+                                'Sign in with phone number',
+                                nextScrenLoginByPhoneNumber,
+                                1),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                nextScreen(context, const ForgetPassword());
+                              },
+                              child: const Text('I forgot my password',
+                                  style:
+                                      TextStyle(fontSize: 15, color: darkblue)),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                nextScreen(context, const Register());
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                                child: const Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text('Don\'t have an account? ',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                          )),
+                                      Text('Sign up',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14,
+                                              color: darkblue)),
+                                    ]),
+                              ),
+                            ),
+                          ],
+                        ))));
+          } else {
+            return SingleChildScrollView(
+                child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+                    child: Form(
+                        key: _scaffoldKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Image(
+                              image: AssetImage(Config.logo),
+                              height: 150,
+                              width: 150,
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            inputDecoration(
+                              hint: 'Enter your email',
+                              inputcontroller: userName,
+                              enable: enable,
+                              orientation: 2,
+                            ),
+                            inputDecorationPassword(
+                              passwordHint: "Password",
+                              passwordController: password,
+                              enable: enable,
+                              orientation: 2,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            buttonRounded(context, loginController, darkblue,
+                                Icons.login, 'Login', login, 2),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            buttonRounded(
+                                context,
+                                googleController,
+                                Colors.red,
+                                FontAwesomeIcons.google,
+                                'Sign in with google',
+                                handleGoogle,
+                                2),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            buttonRounded(
+                                context,
+                                phoneController,
+                                Colors.black,
+                                FontAwesomeIcons.phone,
+                                'Sign in with phone number',
+                                nextScrenLoginByPhoneNumber,
+                                2),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                nextScreen(context, const ForgetPassword());
+                              },
+                              child: const Text('I forgot my password',
+                                  style:
+                                      TextStyle(fontSize: 15, color: darkblue)),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                nextScreen(context, const Register());
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                                child: const Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text('Don\'t have an account? ',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                          )),
+                                      Text('Sign up',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14,
+                                              color: darkblue)),
+                                    ]),
+                              ),
+                            ),
+                          ],
+                        ))));
+          }
+        }));
   }
 
   void nextScrenLoginByPhoneNumber() {

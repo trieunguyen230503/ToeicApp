@@ -65,6 +65,10 @@ dependencies:
   bcrypt: any
   flutter_svg: any
   audioplayers: ^5.2.1
+  speech_to_text: any
+  highlight_text: any
+  avatar_glow: any
+  string_similarity: ^2.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
