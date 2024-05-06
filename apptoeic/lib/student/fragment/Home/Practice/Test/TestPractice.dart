@@ -23,6 +23,7 @@ class TestPractice extends StatefulWidget {
 
 class _TestPracticeState extends State<TestPractice>
     with AutomaticKeepAliveClientMixin {
+  //được sử dụng để giữ cho trạng thái của widget được giữ nguyên khi widget đó bị rebuild.
   String? question;
   List<String> awsList = <String>[];
   List<String> optionList = <String>[

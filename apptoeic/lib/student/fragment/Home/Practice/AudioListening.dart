@@ -60,10 +60,12 @@ class _AudioListeningState extends State<AudioListening> {
           ),
           Expanded(
             child: StreamBuilder<Duration?>(
+              //nó phát ra các sự kiện khi độ dài của âm thanh thay đổi
                 stream: widget.audioPlayer.onDurationChanged,
                 builder: (context, snapshot) {
                   final duration = snapshot.data ?? Duration.zero;
                   return StreamBuilder<Duration>(
+                    //phát ra các sự kiện khi vị trí hiện tại của âm thanh thay đổi để thay đổi slider.
                     stream: widget.audioPlayer.onPositionChanged,
                     builder: (context, positionSnapshot) {
                       final position = positionSnapshot.data ?? Duration.zero;
@@ -83,6 +85,7 @@ class _AudioListeningState extends State<AudioListening> {
                           min: 0.0,
                           max: duration.inMilliseconds.toDouble(),
                           onChanged: (value) {
+                            // được gọi để di chuyển vị trí phát của audioPlayer đến một thời điểm cụ thể.
                             widget.audioPlayer
                                 .seek(Duration(milliseconds: value.toInt()));
                           },
@@ -97,3 +100,5 @@ class _AudioListeningState extends State<AudioListening> {
     );
   }
 }
+// audioPlayer.onDurationChanged và audioPlayer.onPositionChanged là hai stream khác nhau trong audioPlayer.
+// Khi sử dụng StreamBuilder riêng lẻ cho mỗi stream, chúng ta có thể xử lý các sự kiện từ mỗi stream một cách độc lập.

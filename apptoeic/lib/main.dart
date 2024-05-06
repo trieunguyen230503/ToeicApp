@@ -1,6 +1,7 @@
 import 'package:apptoeic/provider/internet_provider.dart';
 import 'package:apptoeic/provider/signin_provider.dart';
 import 'package:apptoeic/splashscreen.dart';
+import 'package:apptoeic/student/fragment/Home/ScanText/ScanPage.dart';
 import 'package:apptoeic/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +30,13 @@ class MyApp extends StatelessWidget {
       providers: [
         //Mỗi provider con có thể cung cấp một đối tượng riêng để sử dụng trong cả ứng dụng
         //Cho phép tổ chức và quản lý việc cung cấp dữ liệu trong cả ứng dụng
-        ChangeNotifierProvider(create: (context) => SignInProvider()),
+        ChangeNotifierProvider(create: (context) => SignInProvider()), //Tạo ra instance và duy trì trong suốt vòng đời của ứng dụng
         ChangeNotifierProvider(create: (context) => InternetProvider())
       ],
       child: MaterialApp(
+        routes: {
+          'scanPage' : (context) => const ScanPage()
+        },
         debugShowCheckedModeBanner: false,
         home: const SplashScreen(),
         theme: lightMode,

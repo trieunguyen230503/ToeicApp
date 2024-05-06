@@ -30,9 +30,11 @@ class SignInProvider extends ChangeNotifier {
   bool _hasError = false;
 
   bool get hasError => _hasError;
-  set hasError(bool value){
+
+  set hasError(bool value) {
     _hasError = value;
   }
+
   String? _errorCode;
 
   String? get errorCode => _errorCode;
@@ -139,7 +141,7 @@ class SignInProvider extends ChangeNotifier {
           default:
             _errorCode = e.toString();
             _hasError = true;
-            notifyListeners();
+            notifyListeners(); // Thông báo cho các widget nghe sự thay đổi
         }
       }
     } else {

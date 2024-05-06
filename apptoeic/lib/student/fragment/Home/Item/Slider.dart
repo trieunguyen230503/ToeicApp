@@ -18,7 +18,10 @@ class SliderImage extends StatefulWidget {
 
 class _SliderState extends State<SliderImage> {
   //Slideshow
-  PageController _pageController = PageController(initialPage: 0);
+  //final được sử dụng để khai báo một biến mà giá trị của nó chỉ có thể được gán một lần và sau đó không thể thay đổi.
+
+  //điều khiển một PageView
+  final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
   Timer? _timer;
 
@@ -40,8 +43,11 @@ class _SliderState extends State<SliderImage> {
       } else {
         _currentPage = 0;
       }
+      //Cuộn trang qua trang mới
       _pageController.animateToPage(_currentPage,
-          duration: const Duration(microseconds: 500), curve: Curves.easeInOut);
+          duration: const Duration(microseconds: 500),
+          //animation chuyển trang
+          curve: Curves.easeInOut);
     });
   }
 
@@ -66,7 +72,6 @@ class _SliderState extends State<SliderImage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            
             width: widget.orientation == 1
                 ? MediaQuery.of(context).size.width
                 : MediaQuery.of(context).size.height,
@@ -74,6 +79,7 @@ class _SliderState extends State<SliderImage> {
                 ? MediaQuery.of(context).size.height * (1 / 4)
                 : MediaQuery.of(context).size.width * (1 / 4), //0.5 ngang
             child: PageView(
+              //để cho phép người dùng cuộn ngang qua các phần tử trong PageView.
               scrollDirection: Axis.horizontal,
               controller: _pageController,
               onPageChanged: (index) {
@@ -87,6 +93,7 @@ class _SliderState extends State<SliderImage> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.01,
           ),
+          //được sử dụng để hiển thị chỉ số (indicator) dưới dạng dấu chấm cho PageView.
           AnimatedSmoothIndicator(
             activeIndex: _currentPage,
             count: _slider.length,

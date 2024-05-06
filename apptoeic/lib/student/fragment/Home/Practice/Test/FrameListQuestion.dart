@@ -30,7 +30,10 @@ class FrameListQuestion extends StatefulWidget {
 
 class _FrameListQuestionState extends State<FrameListQuestion>
     with SingleTickerProviderStateMixin {
-  int _secondLeft = 10000;
+  //Mixin trong Dart cho phép một lớp nhận các đặc điểm từ nhiều nguồn (các mixin), cùng với việc kế thừa từ một lớp cha (nếu có).
+  //cung cấp TickerProvider là một interface trong Flutter
+  // được sử dụng để cung cấp Ticker cho các animations, điều khiển 1 AnimationController duy nhất.
+  int _secondLeft = 1000;
 
   late Timer _timer;
   late TabController _tabController;
@@ -41,6 +44,7 @@ class _FrameListQuestionState extends State<FrameListQuestion>
 
   bool _dataLoaded = false;
 
+  //Option:  Correct Answer, Actual Answer
   Map<int, List<int>> lstAnswer = {};
 
   @override
@@ -57,7 +61,12 @@ class _FrameListQuestionState extends State<FrameListQuestion>
         List.generate(widget.numberQuestion, (index) => AudioPlayer());
     isplaying = List.generate(widget.numberQuestion, (index) => false);
 
-    _tabController = TabController(length: widget.numberQuestion, vsync: this);
+    //Khởi tạo tabController để điều khiển tabBar
+    _tabController = TabController(
+        length: widget.numberQuestion,
+        //Đại diện cho TickerProvider
+        vsync: this);
+
     _tabController.addListener(() {
       if (!_tabController.indexIsChanging) {
         listAudioPlayer?[_tabController.previousIndex].pause();
@@ -242,8 +251,8 @@ class _FrameListQuestionState extends State<FrameListQuestion>
             ),
             body: _dataLoaded
                 ? Container(
-              color: Theme.of(context).colorScheme.background,
-                  child: Column(
+                    color: Theme.of(context).colorScheme.background,
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -268,7 +277,7 @@ class _FrameListQuestionState extends State<FrameListQuestion>
                         // )
                       ],
                     ),
-                )
+                  )
                 : const Center(
                     child: CircularProgressIndicator(
                       color: darkblue,

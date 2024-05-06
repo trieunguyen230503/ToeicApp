@@ -1,5 +1,9 @@
 import 'dart:ui';
 
+// Khi lựa chọn giữa final và const:
+// Sử dụng final khi bạn muốn biến không thay đổi giá trị sau khi đã gán trong thời điểm chạy.
+// Sử dụng const khi bạn muốn biến là một hằng số (constant) đã biết trong thời điểm biên dịch và không thay đổi giá trị sau đó.
+
 const Color mainColor = Color.fromRGBO(71, 188, 171, 1);
 const Color backGroundColor = Color.fromRGBO(248, 248, 248, 1);
 const Color optionItemColor = Color.fromRGBO(254, 254, 254, 1);

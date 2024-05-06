@@ -69,6 +69,12 @@ dependencies:
   highlight_text: any
   avatar_glow: any
   string_similarity: ^2.0.0
+  english_words: ^4.0.0
+  camera: ^0.10.0+4
+  google_mlkit_text_recognition: ^0.4.0
+  permission_handler: ^10.2.0
+  translator: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
